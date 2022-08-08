@@ -15,17 +15,17 @@ The goal of this project is to create an app similar to Amazon. The customer wou
 - Add Routes /w pages for carts,users,products(components)
   - Products
     - Display(get).
-      -  All Prodcuts
+      -  All Prodcuts(sort/filter) 
       -  single product page(by prodId)
-    - Add/Edit/Delete (post/put/delete). ADMIN/USER
-      - user shopping w/modal(add to cart & increase/decrease quantity)
-    - Sort/Filter/Page
-  - Carts(before checkout)
+      -  user shopping w/modal(display more details about product)
+    - Add/Edit/Delete (post/put/delete). ADMIN
+      - Add Product
+  - Basket(before checkout/purhcase)
     - Display(get) all.
-    - Add/Edit/Delete (post/put/delete) . USER
+    - add/edit/delete products to/in basket - USER
   - Carts(After checkout)
     - Display cart history by user(get) Only. USER
-    - View all carts after checkout
+    - View all carts after checkout. ADMIN
   - User
     - Display w/modal to edit info(get/put) . USER
     - Display all users(get) . ADMIN
@@ -33,7 +33,7 @@ The goal of this project is to create an app similar to Amazon. The customer wou
 ### User Login and Registration
 
 - [References] Via Populi
-  - 8/4 (first hour),
+  - 8/4 (first hour),8/8(second half``)
 
 - [Core] 
   - A user should be able to register with the application.

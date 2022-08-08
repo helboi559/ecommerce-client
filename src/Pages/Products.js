@@ -20,30 +20,32 @@ const Products = ({sortField,sortOrder,filterField,filterValue,page,limit,setSor
   const navigate = useNavigate()
   const [cartItems,setCartItems] = useState([])
   const addToBasket = (product) => {
-    // setCartItems(cartItems => [...product])
-    //returns true/false of cart exists
     //MAKE DEEP COPY FIRST!!!
-    const exists = cartItems.find(ele => ele.id === product.id )
+    const deepCopy = JSON.parse(JSON.stringify(product))
+    //returns matching item if it exists in basket or undefined
+    const exists = cartItems.find(ele => ele.id === deepCopy.id )
     if(exists) {
-      setCartItems(cartItems.map(ele => ele.id === product.id ? {...exists, quantity:exists.quantity +1} : ele))
+      setCartItems(cartItems.map(ele => ele.id === deepCopy.id ? {...exists, quantity:exists.quantity +1} : ele))
       console.log("exists true")
     } else {
-      setCartItems([...cartItems,{...product}])
+      setCartItems([...cartItems,{...deepCopy, quantity:1 }])
       console.log('exists false')
     }
     
   }
-  const addToCart = async (product) => {
-    const url = `${urlEndpoint}/carts/create-cart`
-    const response = await fetch(url, {
-      method:"POST",
-      headers: {
-        "Content-Type":"application/json"
-      },
-      body:JSON.stringify(product)
-    })
-    const resJSON = await response.json()
+  const removeFromBasket = (product) => {
+    //deep copy
+    const deepCopy = JSON.parse(JSON.stringify(product))
+    const exists = cartItems.find(ele => ele.id === deepCopy.id )
+    //if basket item qty is 1
+    if(exists.quantity === 1) {
+      setCartItems(cartItems.filter((ele) => ele.id !== deepCopy.id ))
+      console.log("exists exists with quantity of 1")
+    } else {
+      setCartItems(cartItems.map(ele => ele.id === deepCopy.id ? {...exists, quantity:exists.quantity - 1} : ele))
+    }
   }
+  
   
   return (
     <>
@@ -90,7 +92,7 @@ const Products = ({sortField,sortOrder,filterField,filterValue,page,limit,setSor
       <input type="number" value={limit} onChange={(e) => {
         setLimit(Number(e.target.value))
       }} />
-      <Basket addToBasket={addToBasket} cartItems={cartItems}/>
+      <Basket urlEndpoint={urlEndpoint} removeFromBasket={removeFromBasket} addToBasket={addToBasket} cartItems={cartItems} />
       
       <ModalProductUser title={title} show={show} onClose={() => setShow(false)}>
         <label>description</label>
