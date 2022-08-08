@@ -14,8 +14,11 @@ The goal of this project is to create an app similar to Amazon. The customer wou
   ```
 - Add Routes /w pages for carts,users,products(components)
   - Products
-    - Display(get) all. 
-    - Add/Edit/Delete (post/put/delete). ADMIN
+    - Display(get).
+      -  All Prodcuts
+      -  single product page(by prodId)
+    - Add/Edit/Delete (post/put/delete). ADMIN/USER
+      - user shopping w/modal(add to cart & increase/decrease quantity)
     - Sort/Filter/Page
   - Carts(before checkout)
     - Display(get) all.

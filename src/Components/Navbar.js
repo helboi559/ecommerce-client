@@ -13,10 +13,16 @@ const Navbar = () => {
             <Link to="/products">Products</Link>
           </p>
           <p>
+            <Link to="/single-product">Single Product by id</Link>
+          </p>
+          <p>
             <Link to="/users">Users</Link>
           </p>
           <p>
             <Link to="/carts">Carts</Link>
+          </p>
+          <p>
+            <Link to="/create-product">Create Product</Link>
           </p>
         </div>
       </nav>
