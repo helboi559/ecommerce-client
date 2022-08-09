@@ -1,5 +1,5 @@
 import './App.css';
-import {Routes,Route} from "react-router-dom"
+import {Routes,Route,Outlet} from "react-router-dom"
 import HomePage from './Pages/HomePage';
 import Navbar from './Components/Navbar';
 import {useEffect, useState} from 'react'
@@ -8,8 +8,31 @@ import Users from './Pages/Users';
 import Carts from './Pages/Carts';
 import CreateProduct from './Pages/CreateProduct';
 import SingleProduct from './Pages/SingleProduct';
+import RegistrationPage from './Pages/RegistrationPage';
+import LoginPage from './Pages/LoginPage';
+import {useAuth} from "./Hooks/Auth"
+import AdminPage from './Pages/AdminPage';
 
 const urlEndpoint = process.env.REACT_APP_URL_ENDPOINT
+const AdminLayout = () => {
+  const [isAdmin, setIsAdmin] = useState(false);
+  const { verifyAdmin } = useAuth();
+
+  useEffect(() => {
+    const isAdminCheck = async () => {
+      const isAdmin = await verifyAdmin();
+      setIsAdmin(isAdmin);
+    };
+    isAdminCheck();
+  }, []); // This useEffect will trigger once when the user tries to visit /admin
+
+  return (
+    <div>
+      {!isAdmin && <h3>You Must Be An Admin To View This Page. Sorry.</h3>}
+      {isAdmin && <Outlet />}
+    </div>
+  );
+};
 function App() {
   const [productList,setProductList] = useState({message:[],success:true})
   const [singleProd,setSingleProd] = useState({message:null,success:true})
@@ -90,7 +113,12 @@ function App() {
             <Route path='/create-product' element={<CreateProduct productSubmit={productSubmit}/>}/>
             <Route path="/users" element={<Users userList={userList}/>}/>
             <Route path="/carts" element={<Carts cartList={cartList} />}/>
-          
+            <Route path='registration' element={<RegistrationPage />}/>
+            <Route path='login' element={<LoginPage />}/>
+            <Route path='admin' element={<AdminLayout/>}>
+              <Route index element={<AdminPage/>}/>
+            </Route>
+            {/* <Route path='/admin' element={<RegistrationPage/>}/> */}
           </Route>
         </Routes>
       </header>
