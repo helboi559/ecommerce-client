@@ -3,7 +3,7 @@ import {useNavigate} from "react-router-dom"
 const urlEndpoint = process.env.REACT_APP_URL_ENDPOINT
 const AuthContext = createContext();
 
-
+// global access to whole react project
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isAuthLoading, setIsAuthLoading] = useState(false);

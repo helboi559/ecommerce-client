@@ -1,7 +1,11 @@
 import React from 'react'
 import {useState} from "react"
+import { useAuth } from '../Hooks/Auth'
+
 const Basket = ({cartItems,addToBasket,removeFromBasket,urlEndpoint}) => {
   // console.log(cartItems)
+  const {user} = useAuth()
+  // console.log(verifyAdmin)
   const [total,setTotal] = useState(0)
   
   const purchaseCart = async (cartItems) => {
@@ -12,7 +16,8 @@ const Basket = ({cartItems,addToBasket,removeFromBasket,urlEndpoint}) => {
     const response = await fetch(url, {
       method:"POST",
       headers: {
-        "Content-Type":"application/json"
+        "Content-Type":"application/json",
+        token:user
       },
       body:JSON.stringify(data)
     })
