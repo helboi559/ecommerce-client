@@ -12,6 +12,7 @@ import RegistrationPage from './Pages/RegistrationPage';
 import LoginPage from './Pages/LoginPage';
 import {useAuth} from "./Hooks/Auth"
 import AdminPage from './Pages/AdminPage';
+import CartsByUser from './Pages/CartsByUser';
 
 const urlEndpoint = process.env.REACT_APP_URL_ENDPOINT
 const AdminLayout = () => {
@@ -44,7 +45,8 @@ function App() {
   const [filterValue,setFilterValue] = useState('')
   const [page,setPage] = useState(1)
   const [limit,setLimit] = useState(100)
-  
+  const {user} = useAuth()
+  const [orderHistory,setOrderHistory] = useState([])
   //fetch USERS/CARTS/PRODUCTS
 
   useEffect(() => {
@@ -80,6 +82,23 @@ function App() {
     }
     fetchCartList()
   },[])
+  
+  //get order history by user
+  const fetchCartsByUser = async () => {
+      const url = `${urlEndpoint}/carts/user/order-history`
+      const res = await fetch(url, {
+        method:"GET",
+        headers: {
+          "Content-Type":"application/json",
+          token:user
+        }
+      })
+      const resJSON = await res.json()
+      setOrderHistory(resJSON.message)
+      console.log("order history by user",resJSON)
+      return resJSON
+    }
+     
   //create product
   const productSubmit = async (product) => {
     const url = `${urlEndpoint}/products/create-product`
@@ -100,6 +119,7 @@ function App() {
     console.log(resJSON)
     return resJSON
   }
+  
   return (
     <div className="App">
       <header className="App-header">
@@ -113,10 +133,11 @@ function App() {
             <Route path='/create-product' element={<CreateProduct productSubmit={productSubmit}/>}/>
             <Route path="/users" element={<Users userList={userList}/>}/>
             <Route path="/carts" element={<Carts cartList={cartList} />}/>
+            <Route path='/carts/user/order-history' element={<CartsByUser orderHistory={orderHistory} fetchCartsByUser={fetchCartsByUser} />}/>
             <Route path='registration' element={<RegistrationPage />}/>
             <Route path='login' element={<LoginPage />}/>
             <Route path='admin' element={<AdminLayout/>}>
-              <Route index element={<AdminPage/>}/>
+              <Route index element={<AdminPage productList={productList}/>}/>
             </Route>
             {/* <Route path='/admin' element={<RegistrationPage/>}/> */}
           </Route>

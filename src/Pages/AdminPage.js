@@ -1,8 +1,21 @@
 import React from 'react'
 
-const AdminPage = () => {
+const AdminPage = ({productList}) => {
+  const {message,success}=productList
   return (
-    <div>AdminPage</div>
+    <>
+    {success && (
+      <>
+        {message.map((product) => {
+          return (
+            <>
+              {product.id}
+            </>
+          )
+        })}
+      </>
+    )}
+    </>
   )
 }
 

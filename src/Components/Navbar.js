@@ -42,6 +42,9 @@ const Navbar = (props) => {
               <p>
                 <Link to="/carts">Carts</Link>
               </p>
+               <p>
+                <Link to="/carts/user/order-history">My Order History</Link>
+              </p>
               <p>
                 <Link to="/create-product">Create Product</Link>
               </p>
