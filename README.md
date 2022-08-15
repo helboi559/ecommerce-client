@@ -2,34 +2,55 @@
 
 ## Overview
 
-The goal of this project is to create an app similar to Amazon. The customer would have the ability to search and select products for purchase and have them delivered home. The store owner will have the ability to display what items are for sale and remove/edit products details. The features will be user cart such as adding/deleting/modifying items & rating/review system for products purchased only. The admin features will be edit/delete/add/view products on the website. Both user and admin will have login/registration and have access to certain info only.
+The goal of this project is to create an app similar to Amazon. The customer would have the ability to search and select products for purchase and have them delivered home. The "store" owner will have the ability to display what items are for sale and add/remove/edit products details and the buyer would add items to a basket for eventual purchase. Features include adding/deleting/modifying(product quantities) for "cart products". Purchased items will contain  rating/review system for other potential buyers. The admin features include edit/delete/add products on thewebsite. User authentication will be implemented to restrict certain type of info depending on access type/scope.
 
 
 ## Approach - Client 1B
 
 - Install boilerplate (reactapp, dotenv, react-router) and set routing w/testing.
-  ```js
-  //create .env.local file and add server endpoint
-  REACT_APP_URL_ENDPOINT = http://localhost:4000
-  ```
-- Add Routes /w pages for carts,users,products(components)
-  - Products
-    - Display(get).
-      -  All Prodcuts(sort/filter) 
+  
+- Add Routes /w pages for carts,users,products
+  - [Products]
+    - *VIEW(GET)*
       -  single product page(by prodId)
-      -  user shopping w/modal(display more details about product)
-    - Add/Edit/Delete (post/put/delete). ADMIN
-      - Add Product
-  - Basket(before checkout/purhcase)
-    - Display(get) all.
-    - add/edit/delete products to/in basket - USER
-  - Carts(After checkout)
-    - Display cart history by user(get) Only. USER
-    - View all carts after checkout. ADMIN
-  - User
-    - Display w/modal to edit info(get/put) . USER
-    - Display all users(get) . ADMIN
-    - register user
+      -  All Prodcuts(sort/filter) 
+         - shopping w/modal(display w/detials)
+      - Rating/Review (purchased products)-----
+    - *CREATE(POST)*
+      -[Admin] Add new product to website
+    - *EDIT(PUT)*
+      - [Admin] Modify existing product info
+    - *DELETE(DELETE)*
+      - [Admin] Delete a whole product
+  - [CARTS] -Completed Purchases Only
+    - *VIEW(GET)*
+      - View Purchase history by logged in user.
+    - *CREATE(POST)*
+      - [Note] - *Before purchase*
+        - *Basket* - add/edit/delete products to/in basket
+      - Purchase *Basket*
+   - [USERS] 
+    - *VIEW(GET)*
+      - View user details by logged in user. 
+      - [Admin] View all user details
+    - *EDIT(PUT)*
+      - Modify user details by logged in user 
+    - *DELETE(DELETE)*
+      - [Admin] Delete a user 
+      - Delete Own user account ----
+ 
+
+## Approach - Server 2B - Auth
+
+- Create "global" variables(functions) to be accessed anywhere in app w/testing.
+  - [Auth]
+    - Create hook w/createContext,useContext,useMemo.
+      - global access to (user,verifyadmin,login,logout/register)
+    - *VIEW(GET)*
+      - [Admin] Validate Admin by scope(user/admin)
+    - *CREATE(POST)*
+      - Register newly created user
+      - Login user by username/pw
 ### User Login and Registration
 
 - [References] Via Populi

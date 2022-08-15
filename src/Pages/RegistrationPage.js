@@ -5,6 +5,8 @@ import { useAuth } from "../Hooks/Auth";
 const RegistrationPage = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const { login, register } = useAuth();
   return (
     <div>
@@ -23,9 +25,23 @@ const RegistrationPage = (props) => {
           setPassword(e.target.value);
         }}
       />
+      <label>Email</label>
+      <input
+        type="text"
+        onChange={(e) => {
+          setEmail(e.target.value);
+        }}
+      />
+      <label>Phone</label>
+      <input
+        type="text"
+        onChange={(e) => {
+          setPhone(e.target.value);
+        }}
+      />
       <button
         onClick={async () => {
-          const registerResult = await register(username, password);
+          const registerResult = await register(username, password,email,phone);
           if (registerResult.success) {
             const redirectLocation = "/";
             await login(username, password, redirectLocation);

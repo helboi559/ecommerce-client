@@ -16,9 +16,9 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
 
   // call this function when you want to register the user
-  const register = async (username, password) => {
+  const register = async (username, password,email,phone) => {
     setIsAuthLoading(true);
-    const registerResult = await registerUser(username, password);
+    const registerResult = await registerUser(username, password,email,phone);
     setIsAuthLoading(false);
     return registerResult;
   };
@@ -76,7 +76,7 @@ export const useAuth = () => {
   return useContext(AuthContext);
 };
 
-const registerUser = async (username, password) => {
+const registerUser = async (username, password,email,phone) => {
   const url = `${urlEndpoint}/auth/register-user`;
   const response = await fetch(url, {
     method: "POST",
@@ -86,6 +86,8 @@ const registerUser = async (username, password) => {
     body: JSON.stringify({
       username,
       password,
+      email,
+      phone
     }),
   });
   const responseJSON = await response.json();

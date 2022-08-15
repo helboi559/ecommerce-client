@@ -11,8 +11,11 @@ import SingleProduct from './Pages/SingleProduct';
 import RegistrationPage from './Pages/RegistrationPage';
 import LoginPage from './Pages/LoginPage';
 import {useAuth} from "./Hooks/Auth"
-import AdminPage from './Pages/AdminPage';
+import AdminPage from './Pages/AdminProducts';
 import CartsByUser from './Pages/CartsByUser';
+import UserProfile from './Pages/UserProfile';
+import AdminProducts from './Pages/AdminProducts';
+import AdminUsers from './Pages/AdminUsers';
 
 const urlEndpoint = process.env.REACT_APP_URL_ENDPOINT
 const AdminLayout = () => {
@@ -37,7 +40,7 @@ const AdminLayout = () => {
 function App() {
   const [productList,setProductList] = useState({message:[],success:true})
   const [singleProd,setSingleProd] = useState({message:null,success:true})
-  const [userList,setUserList] = useState([])
+  const [userList,setUserList] = useState({message:[],success:true})
   const [cartList,setCartList] = useState([])
   const [sortField,setSortField] = useState('title')
   const [sortOrder,setSortOrder] = useState("asc")
@@ -46,7 +49,8 @@ function App() {
   const [page,setPage] = useState(1)
   const [limit,setLimit] = useState(100)
   const {user} = useAuth()
-  const [orderHistory,setOrderHistory] = useState([])
+  const [orderHistory,setOrderHistory] = useState({message:[],success:true})
+  const [userProfile,setUserProfile] = useState({message:null,success:true})
   //fetch USERS/CARTS/PRODUCTS
 
   useEffect(() => {
@@ -62,11 +66,17 @@ function App() {
   },[sortField,sortOrder,filterField,filterValue,page,limit])
   useEffect(() => {
     const fetchUserList = async () => {
-      const url = `${urlEndpoint}/users`
-      const res = await fetch(url)
+      const url = `${urlEndpoint}/users/user-list`
+      const res = await fetch(url, {
+        method:"GET",
+        headers: {
+          "Content-Type":"application/json",
+          token:user
+        }
+      })
       const resJSON = await res.json()
-      // console.log(resJSON)
       setUserList(resJSON)
+      console.log("userlist",resJSON)
       return resJSON
     }
     fetchUserList()
@@ -94,8 +104,8 @@ function App() {
         }
       })
       const resJSON = await res.json()
-      setOrderHistory(resJSON.message)
-      console.log("order history by user",resJSON)
+      setOrderHistory(resJSON)
+      // console.log("order history by user",resJSON)
       return resJSON
     }
      
@@ -119,6 +129,21 @@ function App() {
     console.log(resJSON)
     return resJSON
   }
+  const fetchUserProfile = async () => {
+    const url = `${urlEndpoint}/users/user/my-profile`
+      const res = await fetch(url, {
+        method:"GET",
+        headers: {
+          "Content-Type":"application/json",
+          token:user
+        }
+      })
+
+      const resJSON = await res.json()
+      setUserProfile(resJSON)
+      // console.log("order history by user",resJSON)
+      return resJSON
+  }
   
   return (
     <div className="App">
@@ -132,12 +157,14 @@ function App() {
             {/* <Route path='/single-product' element={<SingleProduct fetchSingleProduct={fetchSingleProduct} product={product} />}/> */}
             <Route path='/create-product' element={<CreateProduct productSubmit={productSubmit}/>}/>
             <Route path="/users" element={<Users userList={userList}/>}/>
+            <Route path='/users/my-profile' element={<UserProfile urlEndpoint={urlEndpoint} userProfile={userProfile} fetchUserProfile={fetchUserProfile}/>}/>
             <Route path="/carts" element={<Carts cartList={cartList} />}/>
             <Route path='/carts/user/order-history' element={<CartsByUser orderHistory={orderHistory} fetchCartsByUser={fetchCartsByUser} />}/>
             <Route path='registration' element={<RegistrationPage />}/>
             <Route path='login' element={<LoginPage />}/>
             <Route path='admin' element={<AdminLayout/>}>
-              <Route index element={<AdminPage productList={productList}/>}/>
+              <Route path='products' element={<AdminProducts productList={productList} fetchSingleProduct={fetchSingleProduct} singleProd={singleProd} urlEndpoint={urlEndpoint}/>}/>
+              <Route path='/admin/users' element={<AdminUsers userList={userList} urlEndpoint={urlEndpoint}/>}/>
             </Route>
             {/* <Route path='/admin' element={<RegistrationPage/>}/> */}
           </Route>

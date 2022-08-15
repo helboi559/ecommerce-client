@@ -1,7 +1,7 @@
 import React from 'react'
 import "./ModalProductUser.css"
 
-const ModalProductUser = (props) => {
+const ModalAdminProduct = (props) => {
   if(!props.show) {
     return null
   }
@@ -14,10 +14,14 @@ const ModalProductUser = (props) => {
             <div className="modal-body">{props.children}</div>
             <div className="modal-footer">
                 <button className="button" onClick={(props.onClose)}>Close</button>
+                <button className="button" onClick={()=> {
+                  props.putUpdatedProduct()
+                }}>Update Product</button>
             </div>
+
         </div>
     </div>
   )
 }
 
-export default ModalProductUser
+export default ModalAdminProduct

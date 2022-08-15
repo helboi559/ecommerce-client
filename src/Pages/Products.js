@@ -105,7 +105,7 @@ const Products = ({sortField,sortOrder,filterField,filterValue,page,limit,setSor
       <p>{!success && message}</p>
       {!!success && (
         <>
-          {message.map((product, index) => {
+          {message.map((product) => {
             // console.log(product)
             const fetchProductAndShow = async () => {
               const response = await fetchSingleProduct(product.id)
