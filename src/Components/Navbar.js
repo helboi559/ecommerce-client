@@ -8,54 +8,55 @@ const Navbar = (props) => {
   return (
     <div>
       <nav className='nav'>
-        <ul>
+        
           {!user && (
-            <div>
-              <li>
+            <ul>
+              <li >
                 <Link to="/registration">Registration Page</Link>
               </li>
               <li>
                 <Link to="/login">Login Page</Link>
               </li>
-            </div>
+            </ul>
           )}
-        </ul>
+        
           {user && (
-            <div> 
+            <ul> 
+              
+              <li >
+              <Link to="/">HomePage</Link>
+              </li>
+              <li>
+               <Link to="/products">Products</Link>
+              </li>
+              <li>
+                <Link to="/single-product">Single Product by id</Link>
+              </li>
+              <li>
+                <Link to="/users/my-profile">MyProfile</Link>
+              </li>
+              <li>
+                <Link to="/carts">Carts</Link>
+              </li>
+               <li>
+                <Link to="/carts/user/order-history">My Order History</Link>
+              </li>
+              <li>
+                <Link to="/create-product">Create Product</Link>
+              </li>
+              <li>
+              <Link to="/admin/products">Admin-Products</Link>
+              </li>
+              <li>
+              <Link to="/admin/users">Admin-Users</Link>
+              </li>
               <span>
                 <strong>You are Logged in</strong>
               </span>
-              <p>
-              <Link to="/">HomePage</Link>
-              </p>
-              <p>
-               <Link to="/products">Products</Link>
-              </p>
-              <p>
-                <Link to="/single-product">Single Product by id</Link>
-              </p>
-              <p>
-                <Link to="/users/my-profile">MyProfile</Link>
-              </p>
-              <p>
-                <Link to="/carts">Carts</Link>
-              </p>
-               <p>
-                <Link to="/carts/user/order-history">My Order History</Link>
-              </p>
-              <p>
-                <Link to="/create-product">Create Product</Link>
-              </p>
-              <p>
-              <Link to="/admin/products">Admin-Products</Link>
-              </p>
-              <p>
-              <Link to="/admin/users">Admin-Users</Link>
-              </p>
               <button onClick={async () => {
                 await logout()
               }}>Logout</button>
-            </div>
+            </ul>
           )}
       </nav>
       <Outlet/>

@@ -1,5 +1,36 @@
-/* .nav {
-color: white;
+
+.nav {
 display: flex;
-border: 1px solid;
-}` */
+color: white;
+background-color: rgb(17, 20, 31);
+/* border: 1px solid red; */
+justify-content:flex-end;
+align-items: stretch;
+gap: 2px;
+padding: 11px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    margin: 0;
+}
+.nav a {
+    color: white;
+    height: 100%;
+    display: flex;
+    text-decoration: none;
+    align-items: center;
+}
+
+.nav li.active {
+    background-color: #444;
+}
+.nav li:hover {
+    background-color: #777;
+}

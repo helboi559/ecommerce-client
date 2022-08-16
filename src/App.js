@@ -141,13 +141,13 @@ function App() {
 
       const resJSON = await res.json()
       setUserProfile(resJSON)
-      // console.log("order history by user",resJSON)
+      console.log("user profile",resJSON)
       return resJSON
   }
   
   return (
     <div className="App">
-      <header className="App-header">
+      {/* <header className="App-header"> */}
         <Routes>
           <Route path='/' element={<Navbar/>}>
             <Route index element={<HomePage />}/>
@@ -169,7 +169,7 @@ function App() {
             {/* <Route path='/admin' element={<RegistrationPage/>}/> */}
           </Route>
         </Routes>
-      </header>
+      {/* </header> */}
     </div>
   );
 }

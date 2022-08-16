@@ -8,7 +8,7 @@ const ProdUserCard = ({product,fetchProductAndShow,addToBasket}) => {
   // const [price,setPrice] = useState(1)
   // const 
   return (
-    <div >
+    <div className="">
       <p>Product Id: {product.id}</p>
       <p>Product title: {product.title}</p>
       <p>Product category: {product.category}</p>

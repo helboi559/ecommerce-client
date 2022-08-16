@@ -24,7 +24,7 @@ const Basket = ({cartItems,addToBasket,removeFromBasket,urlEndpoint}) => {
     const resJSON = await response.json()
   }
   return (
-    <>
+    <aside className='block col-1'>
         <h3>Basket</h3>
         {/* if basket is empty show basket is empty */}
         <div>{cartItems.length === 0 && <div>Cart Is Empty</div> }</div>
@@ -50,7 +50,7 @@ const Basket = ({cartItems,addToBasket,removeFromBasket,urlEndpoint}) => {
           </>
         )} 
         
-    </>
+    </aside>
   )
 }
 

@@ -12,7 +12,8 @@ const UserProfile = ({userProfile,fetchUserProfile,urlEndpoint}) => {
     const [show,setShow] = useState(false)
     // const []
     useEffect(()=> {
-    fetchUserProfile()
+        
+        fetchUserProfile()
     },[user])
     
     const putUpdatedProfile = async() => {

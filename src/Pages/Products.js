@@ -48,8 +48,9 @@ const Products = ({sortField,sortOrder,filterField,filterValue,page,limit,setSor
   
   
   return (
-    <>
+    <div className="">
       <h3>Products</h3>
+      <Basket urlEndpoint={urlEndpoint} removeFromBasket={removeFromBasket} addToBasket={addToBasket} cartItems={cartItems} />
       <label>SortField</label>
       <select value={sortField} onChange={(e) => {
         setSortField(e.target.value)
@@ -92,7 +93,6 @@ const Products = ({sortField,sortOrder,filterField,filterValue,page,limit,setSor
       <input type="number" value={limit} onChange={(e) => {
         setLimit(Number(e.target.value))
       }} />
-      <Basket urlEndpoint={urlEndpoint} removeFromBasket={removeFromBasket} addToBasket={addToBasket} cartItems={cartItems} />
       
       <ModalProductUser title={title} show={show} onClose={() => setShow(false)}>
         <label>description</label>
@@ -104,7 +104,7 @@ const Products = ({sortField,sortOrder,filterField,filterValue,page,limit,setSor
       </ModalProductUser>
       <p>{!success && message}</p>
       {!!success && (
-        <>
+        <div className="">
           {message.map((product) => {
             // console.log(product)
             const fetchProductAndShow = async () => {
@@ -118,15 +118,15 @@ const Products = ({sortField,sortOrder,filterField,filterValue,page,limit,setSor
               setShow(true)
             }
             return (
-              <div>
+              <div className='container'>
                 <ProdUserCard addToBasket={addToBasket} product={product} fetchProductAndShow={fetchProductAndShow}/>
               </div>
             );
           })}
-        </>
+        </div>
       )}
       
-    </>
+    </div>
   )
 }
 
