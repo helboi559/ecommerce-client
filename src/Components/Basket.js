@@ -24,7 +24,7 @@ const Basket = ({cartItems,addToBasket,removeFromBasket,urlEndpoint}) => {
     const resJSON = await response.json()
   }
   return (
-    <aside className='block col-1'>
+    <div className=''>
         <h3>Basket</h3>
         {/* if basket is empty show basket is empty */}
         <div>{cartItems.length === 0 && <div>Cart Is Empty</div> }</div>
@@ -41,16 +41,16 @@ const Basket = ({cartItems,addToBasket,removeFromBasket,urlEndpoint}) => {
           </div>
         ))}
         {cartItems.length !== 0 && (
-          <>
+          <div>
             <hr />
             <button onClick={() => {
               // console.log(cartItems)
               purchaseCart(cartItems)
             }}>Purchase</button>
-          </>
+          </div>
         )} 
         
-    </aside>
+    </div>
   )
 }
 

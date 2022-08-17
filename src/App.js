@@ -86,7 +86,7 @@ function App() {
       const url = `${urlEndpoint}/carts`
       const res = await fetch(url)
       const resJSON = await res.json()
-      // console.log(resJSON)
+      console.log("fetchCartList",resJSON)
       setCartList(resJSON)
       return resJSON
     }

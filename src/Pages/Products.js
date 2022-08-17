@@ -4,6 +4,7 @@ import ModalProductUser from '../Components/ModalProductUser'
 import {useState} from "react"
 import ProdUserCard from '../Components/ProdUserCard'
 import Basket from '../Components/Basket'
+import ProductCard from "../Styles/ProductCard.css"
 //set global filter values 
 const sortFieldOption = ["title","category","price"]
 const sortOrderOption = ["asc","desc"]
@@ -49,50 +50,53 @@ const Products = ({sortField,sortOrder,filterField,filterValue,page,limit,setSor
   
   return (
     <div className="">
-      <h3>Products</h3>
+      <div>{!success && message}</div>
+      <div className="">
+          <label>SortField</label>
+        <select value={sortField} onChange={(e) => {
+          setSortField(e.target.value)
+        }}>
+          {sortFieldOption.map((ele) =>{
+            return (
+              <option value={ele}>{ele}</option>
+            )
+          })}
+        </select>
+        <label>SortOrder</label>
+        <select value={sortOrder} onChange={(e) => {
+          setSortOrder(e.target.value)
+        }}>
+          {sortOrderOption.map((ele) =>{
+            return (
+              <option value={ele}>{ele}</option>
+            )
+          })}
+        </select>
+        <label>FilterField</label>
+        <select value={filterField} onChange={(e) => {
+          setFilterField(e.target.value)
+        }}>
+          {filterFieldOption.map((ele) =>{
+            return (
+              <option value={ele}>{ele}</option>
+            )
+          })}
+        </select>
+        <label> Filter Value</label>
+        <input type="text" value={filterValue} onChange={(e) => {
+          setFilterValue(e.target.value)
+        }} />
+        <label> Page</label>
+        <input type="number" value={page} onChange={(e) => {
+          setPage(Number(e.target.value))
+        }} />
+        <label> Limit</label>
+        <input type="number" value={limit} onChange={(e) => {
+          setLimit(Number(e.target.value))
+        }} />
+
+      </div>
       <Basket urlEndpoint={urlEndpoint} removeFromBasket={removeFromBasket} addToBasket={addToBasket} cartItems={cartItems} />
-      <label>SortField</label>
-      <select value={sortField} onChange={(e) => {
-        setSortField(e.target.value)
-      }}>
-        {sortFieldOption.map((ele) =>{
-          return (
-            <option value={ele}>{ele}</option>
-          )
-        })}
-      </select>
-      <label>SortOrder</label>
-      <select value={sortOrder} onChange={(e) => {
-        setSortOrder(e.target.value)
-      }}>
-        {sortOrderOption.map((ele) =>{
-          return (
-            <option value={ele}>{ele}</option>
-          )
-        })}
-      </select>
-      <label>FilterField</label>
-      <select value={filterField} onChange={(e) => {
-        setFilterField(e.target.value)
-      }}>
-        {filterFieldOption.map((ele) =>{
-          return (
-            <option value={ele}>{ele}</option>
-          )
-        })}
-      </select>
-      <label> Filter Value</label>
-      <input type="text" value={filterValue} onChange={(e) => {
-        setFilterValue(e.target.value)
-      }} />
-      <label> Page</label>
-      <input type="number" value={page} onChange={(e) => {
-        setPage(Number(e.target.value))
-      }} />
-      <label> Limit</label>
-      <input type="number" value={limit} onChange={(e) => {
-        setLimit(Number(e.target.value))
-      }} />
       
       <ModalProductUser title={title} show={show} onClose={() => setShow(false)}>
         <label>description</label>
@@ -102,9 +106,11 @@ const Products = ({sortField,sortOrder,filterField,filterValue,page,limit,setSor
         <label>Category</label>
         <div>{category}</div>
       </ModalProductUser>
-      <p>{!success && message}</p>
+      <nav>
+        <div className="das"></div>
+      </nav>
       {!!success && (
-        <div className="">
+        <section>
           {message.map((product) => {
             // console.log(product)
             const fetchProductAndShow = async () => {
@@ -118,12 +124,12 @@ const Products = ({sortField,sortOrder,filterField,filterValue,page,limit,setSor
               setShow(true)
             }
             return (
-              <div className='container'>
-                <ProdUserCard addToBasket={addToBasket} product={product} fetchProductAndShow={fetchProductAndShow}/>
-              </div>
+              
+                <ProdUserCard key={product.id} addToBasket={addToBasket} product={product} fetchProductAndShow={fetchProductAndShow}/>
+              
             );
           })}
-        </div>
+        </section>
       )}
       
     </div>

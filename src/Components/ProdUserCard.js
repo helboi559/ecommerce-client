@@ -1,5 +1,5 @@
 import React from 'react'
-import {useState} from "react"
+// import {useState} from "react"
 
 
 // const currentCart = []
@@ -8,12 +8,16 @@ const ProdUserCard = ({product,fetchProductAndShow,addToBasket}) => {
   // const [price,setPrice] = useState(1)
   // const 
   return (
-    <div className="">
-      <p>Product Id: {product.id}</p>
-      <p>Product title: {product.title}</p>
-      <p>Product category: {product.category}</p>
-      <p>Product price: {product.price}</p>
-      <button onClick={() => {
+    <div className='cards'>
+      <div className="image-box">
+        <img src={product.image} alt="" />
+      </div>
+      <div className="details">
+        <p>{product.title}</p>
+        <p>ProductId#:{product.id}</p>
+        <p>Category:{product.category}</p>
+        <p>Price:{product.price}</p>
+        <button onClick={() => {
         fetchProductAndShow()
       }}>Show Details</button>
        <button className="button" onClick={() => {
@@ -32,10 +36,8 @@ const ProdUserCard = ({product,fetchProductAndShow,addToBasket}) => {
         //  console.log(currProd)
 
        }}>Add to Cart</button>
-      {/* <input type="number" min="1" value={quantity} name="Quantity" onChange={(e) => {
-        const qty = e.target.value
-        setQuantity(Number(e.target.value))
-      }}/> */}
+      </div>
+      
     </div>
   )
 }

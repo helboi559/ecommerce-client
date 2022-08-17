@@ -1,7 +1,7 @@
 .App {
   text-align: center;
   background-color: white;
-  font-size: calc(3px + 2vmin);
+  /* font-size: calc(3px + 2vmin); */
 }
 
 /* .App-header {
@@ -13,19 +13,28 @@
   font-size: calc(5px + 2vmin);
   color: black
 } */
-.container {
-  display: flex;
-  /* flex-direction: column; */
-  flex-flow: row wrap;
-  justify-content: space-around;
+.products-container {
+  /* display: flex; */
+  /* flex-direction: row; */
+  /* flex-flow: wrap  */
+  /* justify-content: space-around; */
 }
 
-.item {
-  /* flex-basis: auto; */
-  font-size: calc(1px + 2vmin);
+/* .products-basket {
+  background-color: aqua;
+  padding: 1rem;
+  border-radius: 0.5rem;
+} */
+.products {
+  /* flex-direction: row;
+  background-color: white;
+  font-size: calc(1px + 2vmin); */
+  /* flex-direction: row; */
+  flex: 1;
 }
-/* .row {
+.row {
  display: flex;
+ /* flex-direction: column; */
  justify-content: space-between;
 }
 .col-1 {
@@ -33,16 +42,16 @@
 }
 .col-2 {
   flex: 2;
-} */
+}
 
 
-.block {
+/* .block {
   background-color: #777;
   margin: 0.5rem;
   padding: 1rem;
   border-radius: 0.5rem;
-}
-
-/* .row.center {
-  align-items: center;
 } */
+
+.row.center {
+  align-items: center;
+}
