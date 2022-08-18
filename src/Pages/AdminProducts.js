@@ -3,6 +3,7 @@ import ModalAdminProduct from '../Components/ModalAdminProduct'
 import {useState,useEffect} from "react"
 import ProdAdminCard from '../Components/ProdAdminCard'
 import { useAuth } from '../Hooks/Auth'
+// import ProductCard from "../Styles/ProductCard.css"
 const AdminProducts = ({productList,fetchSingleProduct,urlEndpoint}) => {
   const {message,success}=productList
   const [show,setShow] = useState(false)
@@ -40,8 +41,8 @@ const AdminProducts = ({productList,fetchSingleProduct,urlEndpoint}) => {
   }
   
   return (
-    <div>
-      <h3>Admin-Products</h3>
+    <>
+      <h1>Admin-Products</h1>
       <ModalAdminProduct putUpdatedProduct={putUpdatedProduct} title={title} show={show} onClose={()=>setShow(false)} >
       <label>Title</label>
       <input type="text" value={title} onChange={(e)=> {
@@ -62,12 +63,12 @@ const AdminProducts = ({productList,fetchSingleProduct,urlEndpoint}) => {
       </ModalAdminProduct>
       <div>{!success && message}</div>
       {success && (
-        <div>
+        <section>
           {message.map((product) => {
             const fetchProductAndShow = async () => {
               const response = await fetchSingleProduct(product.id)
               const resJSON = response.message
-              console.log(resJSON)
+              console.log("fetchProductAndShow()",resJSON)
               setTitle(resJSON.title)
               setCategory(resJSON.category)
               setPrice(Number(resJSON.price))
@@ -77,14 +78,14 @@ const AdminProducts = ({productList,fetchSingleProduct,urlEndpoint}) => {
             }
             
             return (
-              <div key={`product-id-${product.id}`}>
+              
                 <ProdAdminCard product={product} urlEndpoint={urlEndpoint} fetchProductAndShow={fetchProductAndShow}/>
-              </div>
+              
             )
           })}
-        </div>
+        </section>
       )}
-    </div>
+    </>
   )
 }
 

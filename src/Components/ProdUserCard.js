@@ -28,7 +28,8 @@ const ProdUserCard = ({product,fetchProductAndShow,addToBasket}) => {
          const currProd = {
            price,
            id:productId,
-           title:product.title
+           title:product.title,
+           image:product.image
          }
          addToBasket(currProd)
         //  console.log(productId)

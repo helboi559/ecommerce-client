@@ -1,5 +1,4 @@
 import React from 'react'
-import {useNavigate} from 'react-router-dom'
 import ModalProductUser from '../Components/ModalProductUser'
 import {useState} from "react"
 import ProdUserCard from '../Components/ProdUserCard'
@@ -18,7 +17,6 @@ const Products = ({sortField,sortOrder,filterField,filterValue,page,limit,setSor
   const [category,setCategory] = useState('')
   const [description,setDescription] = useState('')
   const [image,setImage] = useState('')
-  const navigate = useNavigate()
   const [cartItems,setCartItems] = useState([])
   const addToBasket = (product) => {
     //MAKE DEEP COPY FIRST!!!
@@ -106,9 +104,7 @@ const Products = ({sortField,sortOrder,filterField,filterValue,page,limit,setSor
         <label>Category</label>
         <div>{category}</div>
       </ModalProductUser>
-      <nav>
-        <div className="das"></div>
-      </nav>
+      
       {!!success && (
         <section>
           {message.map((product) => {

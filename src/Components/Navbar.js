@@ -35,14 +35,15 @@ const Navbar = (props) => {
               <li>
                 <Link to="/users/my-profile">MyProfile</Link>
               </li>
-              <li>
-                <Link to="/carts">Carts</Link>
+             
+               <li>
+                <Link to="/carts/user/order-history">My Orders</Link>
               </li>
                <li>
-                <Link to="/carts/user/order-history">My Order History</Link>
+                <Link to="/carts">Admin-All Purchases</Link>
               </li>
               <li>
-                <Link to="/create-product">Create Product</Link>
+                <Link to="/create-product">Admin-Create Product</Link>
               </li>
               <li>
               <Link to="/admin/products">Admin-Products</Link>

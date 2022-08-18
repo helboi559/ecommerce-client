@@ -1,11 +1,14 @@
 import React from 'react'
 import { useEffect ,useState} from 'react'
 import { useAuth } from '../Hooks/Auth'
+import {useNavigate} from "react-router-dom"
+
 const ProdAdminCard = ({product,fetchProductAndShow,urlEndpoint}) => {
   // const [isLoading,setIsLoading] = useState(false)
   // useEffect(()=> {
 
   // },[])
+  const navigate = useNavigate()
   const {user} = useAuth()
   const deleteProduct = async()=> {
     const url = `${urlEndpoint}/products/delete-product`
@@ -26,18 +29,26 @@ const ProdAdminCard = ({product,fetchProductAndShow,urlEndpoint}) => {
         return responseJSON
   }
   return (
-    <div>
-        <div>Product title: {product.title}</div>
-        <div>Product category: {product.category}</div>
-        <div>Product price: {product.price}</div>
-        <button onClick={()=> {
+    <div className='cards'>
+      <div className="image-box">
+        <img src={product.image}  alt="" />
+      </div>
+      <div className="details">
+        <p>Product title: {product.title}</p>
+        <p>Product category: {product.category}</p>
+        <p>Product price: {product.price}</p>
+         <button className='admin-edit' onClick={()=> {
             // setIsLoading(true)
             fetchProductAndShow()
             // setIsLoading(false)
         }}>Edit</button>
-        <button onClick={()=> {
+        <button className='admin-delete' onClick={()=> {
           deleteProduct()
+          navigate('/products')
         }}>Delete</button>
+      </div>
+        
+       
     </div>
   )
 }
