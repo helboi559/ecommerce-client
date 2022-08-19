@@ -3,6 +3,7 @@ import ModalAdminProduct from '../Components/ModalAdminProduct'
 import {useState,useEffect} from "react"
 import ProdAdminCard from '../Components/ProdAdminCard'
 import { useAuth } from '../Hooks/Auth'
+import {useNavigate} from "react-router-dom"
 // import ProductCard from "../Styles/ProductCard.css"
 const AdminProducts = ({productList,fetchSingleProduct,urlEndpoint}) => {
   const {message,success}=productList
@@ -18,6 +19,7 @@ const AdminProducts = ({productList,fetchSingleProduct,urlEndpoint}) => {
   // useEffect(()=> {
 
   // },[price,title,category,description])
+  const navigate = useNavigate()
   const putUpdatedProduct = async()=> {
     const url = `${urlEndpoint}/products/edit-product`
     setIsLoading(true)
@@ -43,7 +45,7 @@ const AdminProducts = ({productList,fetchSingleProduct,urlEndpoint}) => {
   return (
     <>
       <h1>Admin-Products</h1>
-      <ModalAdminProduct putUpdatedProduct={putUpdatedProduct} title={title} show={show} onClose={()=>setShow(false)} >
+      <ModalAdminProduct  navigate={navigate} putUpdatedProduct={putUpdatedProduct} title={title} show={show} onClose={()=>setShow(false)} >
       <label>Title</label>
       <input type="text" value={title} onChange={(e)=> {
         setTitle(e.target.value)
@@ -79,7 +81,7 @@ const AdminProducts = ({productList,fetchSingleProduct,urlEndpoint}) => {
             
             return (
               
-                <ProdAdminCard product={product} urlEndpoint={urlEndpoint} fetchProductAndShow={fetchProductAndShow}/>
+                <ProdAdminCard navigate={navigate} product={product} urlEndpoint={urlEndpoint} fetchProductAndShow={fetchProductAndShow}/>
               
             )
           })}

@@ -16,6 +16,7 @@ const ModalAdminProduct = (props) => {
                 <button className="button" onClick={(props.onClose)}>Close</button>
                 <button className="button" onClick={()=> {
                   props.putUpdatedProduct()
+                  props.navigate('/products')
                 }}>Update Product</button>
             </div>
 

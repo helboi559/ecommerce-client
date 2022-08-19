@@ -97,12 +97,12 @@ const Products = ({sortField,sortOrder,filterField,filterValue,page,limit,setSor
       <Basket urlEndpoint={urlEndpoint} removeFromBasket={removeFromBasket} addToBasket={addToBasket} cartItems={cartItems} />
       
       <ModalProductUser title={title} show={show} onClose={() => setShow(false)}>
-        <label>description</label>
+        <label><strong>Description:</strong></label>
         <div>{description}</div>
-        <label>price</label>
-        <div>{price}</div>
-        <label>Category</label>
+        <label><strong>Category:</strong></label>
         <div>{category}</div>
+        <label><strong>Price:</strong></label>
+        <div>${price}</div>
       </ModalProductUser>
       
       {!!success && (
@@ -132,11 +132,5 @@ const Products = ({sortField,sortOrder,filterField,filterValue,page,limit,setSor
   )
 }
 
-//  <li key={`product-${index + 1}`} onClick={() => {
-//                 //trigger shop modal
-//               }}>
-//                 <p>Title({product.title})- Price({product.price})- Category({product.category})</p>
-//                 <p>Description({product.description})</p>
-//               </li>
 
 export default Products

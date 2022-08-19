@@ -20,6 +20,7 @@ const CartsByUser = ({fetchCartsByUser,orderHistory}) => {
     }
     return (
     <>
+      <h1>My Order History</h1><hr/>
        <div>{!success && message}</div>
       {!!success && (
         <div className='order-list'>
@@ -30,9 +31,9 @@ const CartsByUser = ({fetchCartsByUser,orderHistory}) => {
                   <p>Order Date-{order.date.slice(0,10)}</p>
                   <p>Order#-{order.id}</p>
                 </div>
-                {order.products.map((product)=> {
+                {order.products.map((product,index)=> {
                 return (
-                  <div className='order-items'>
+                  <div className='order-items' key={`product-index-${index}`}>
                     <div className='item-header'>
                        <p>{product.title}</p>
                     </div>

@@ -1,14 +1,14 @@
 import React from 'react'
 import { useEffect ,useState} from 'react'
 import { useAuth } from '../Hooks/Auth'
-import {useNavigate} from "react-router-dom"
 
-const ProdAdminCard = ({product,fetchProductAndShow,urlEndpoint}) => {
+
+const ProdAdminCard = ({product,fetchProductAndShow,urlEndpoint,navigate}) => {
   // const [isLoading,setIsLoading] = useState(false)
   // useEffect(()=> {
 
   // },[])
-  const navigate = useNavigate()
+  
   const {user} = useAuth()
   const deleteProduct = async()=> {
     const url = `${urlEndpoint}/products/delete-product`

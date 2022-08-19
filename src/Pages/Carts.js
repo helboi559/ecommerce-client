@@ -1,28 +1,51 @@
 import React from 'react'
+import { useEffect } from 'react'
 
-const Carts = ({cartList}) => {
-  console.log(cartList)
+const Carts = ({fetchAllPurchases,orderHistory}) => {
+  useEffect(()=> {
+    fetchAllPurchases()
+  },[])
+  const {message,success} = orderHistory
+  const sortByDate = (arr)=> {
+      const deepCopy =  JSON.parse(JSON.stringify(arr))
+      return deepCopy.reverse()
+      
+    }
   return (
     <>
-       <h1>All Purchases</h1>
-      {cartList.map((cart) => {
-        return (
-          <div>
-            <p>Cart Id(purchaseID): {cart.id}</p>
-            <p> UserID (user who purchased) {cart.userId}</p>
-            <p>{cart.date}</p>
-            {cart.products.map((product) => {
-              return (
-                <div>
-                  <p>Product Id{product.productId}</p>
-                  <p>Product Qty{product.quantity}</p>
+      <h1>Admin-All Purchases</h1>
+      <div>{!success && message}</div>
+      {!!success && (
+        <div className='order-list'>
+          {sortByDate(message).map((order)=> {
+            return (
+              <div className="order" key={`admin-order-id-${order.id}`}><hr />
+                <div className='order-header'>
+                  <p>Order Date-{order.date.slice(0,10)}</p>
+                  <p>Order#-{order.id}</p>
+                  <p>userId#-{order.userId}</p>
                 </div>
-              )
-            })}
-            
-          </div>
-        )
-      })}
+                {order.products.map((product,index)=> {
+                return (
+                  <div className='order-items' key={`admin-product-index-${index}`}>
+                    <div className='item-header'>
+                       <p>{product.title}</p>
+                    </div>
+                   <div className="item-details">
+                    <p>Price-${product.price}</p>
+                    <p>Qty-{product.quantity}</p> 
+                   </div>
+                    
+                  </div>
+                )
+              })}
+              </div>
+            )
+          })}
+        </div>
+      )}
+       
+      
     </>
   )
 }

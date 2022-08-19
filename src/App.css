@@ -83,3 +83,11 @@
   text-decoration-line: underline;
   font-weight: bold;
 }
+
+.user-profile:nth-child(odd) {
+  background-color: rgb(203, 227, 182);
+}
+
+.user-profile:nth-child(even) {
+  background-color: rgb(243, 218, 197);
+}

@@ -1,10 +1,12 @@
 import React from 'react'
+
 import "./ModalProductUser.css"
 
 const ModalUserProfile = (props) => {
   if(!props.show) {
     return null
   }
+  
   return (
     <div className="modal" onClick={props.onClose}>
         <div className="modal-content" onClick={e => e.stopPropagation()}>
@@ -16,6 +18,7 @@ const ModalUserProfile = (props) => {
                 <button className="button" onClick={(props.onClose)}>Close</button>
                 <button className="button" onClick={()=> {
                   props.putUpdatedProfile()
+                  props.navigate('/products')
                 }}>Update Profile</button>
             </div>
 
