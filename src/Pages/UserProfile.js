@@ -57,6 +57,7 @@ const UserProfile = ({singleUser,fetchSingleUser,urlEndpoint}) => {
         {!!success && (
             <div className='user-profile'>
                 <div >UserName:{message.username}</div>
+                {/* {console.log(message.email)} */}
                 <div>Email:{message.email}</div>
                 <div>Phone#:{message.phone}</div>
                 <div>Id:{message.id}</div>

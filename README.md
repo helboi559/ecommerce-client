@@ -2,45 +2,44 @@
 
 ## Overview
 
-The goal of this project is to create an app similar to Amazon. The customer would have the ability to search and select products for purchase and have them delivered home. The "store" owner will have the ability to display what items are for sale and add/remove/edit products details and the buyer would add items to a basket for eventual purchase. Features include adding/deleting/modifying(product quantities) for "cart products". Purchased items will contain  rating/review system for other potential buyers. The admin features include edit/delete/add products on thewebsite. User authentication will be implemented to restrict certain type of info depending on access type/scope.
+This app similar to Amazon. The customer would have the ability to search and select products for purchase and have them "delivered home". The "store owner" will have the ability to display what items are for sale and make changes to products and the "shopper" would browse items and potentially make a purchase. Features are destinguished by "store owner"/"admin" and "shopper"/"user" in mind. Admin features include edit/delete/add products in the app. User features include add a purchase "basket" to carts history.Authentication features will be implemented to restrict certain app features depending on access type/scope. 
 
 
-## Approach - Client 1B
+## Routing Approach - Client 1B 
 
-- Install boilerplate (reactapp, dotenv, react-router) and set routing w/testing.
-  
-- Add Routes /w pages for carts,users,products
-  - [Products]
+- After boilerplate & dependencies are installed/configured (reactapp, dotenv, react-router), [PRODUCTS],[CARTS],[USERS] & [ADMIN] are the main routes for this app.
+  - [Products]:
     - *VIEW(GET)*
-      -  single product page(by prodId)
       -  All Prodcuts(sort/filter) 
-         - shopping w/modal(display w/detials)
-      - Rating/Review (purchased products)-----
+      - [NYI]NOT YET IMPLEMENTED
+        - Single product page(by prodId) 
+        - Rating/Review (purchased products)
     - *CREATE(POST)*
-      -[Admin] Add new product to website
+      - [Admin] Add new product to store.
     - *EDIT(PUT)*
-      - [Admin] Modify existing product info
+      - [Admin] Modify existing product info.
     - *DELETE(DELETE)*
-      - [Admin] Delete a whole product
-  - [CARTS] -Completed Purchases Only
+      - [Admin] Delete a product.
+  - [CARTS]
     - *VIEW(GET)*
       - View Purchase history by logged in user.
     - *CREATE(POST)*
-      - [Note] - *Before purchase*
+      - [Note] - *BEFORE PURCHASE*
         - *Basket* - add/edit/delete products to/in basket
-      - Purchase *Basket*
+        - *Basket* - Purchase
    - [USERS] 
-    - *VIEW(GET)*
-      - View user details by logged in user. 
-      - [Admin] View all user details
-    - *EDIT(PUT)*
-      - Modify user details by logged in user 
-    - *DELETE(DELETE)*
-      - [Admin] Delete a user 
-      - Delete Own user account ----
+      - *VIEW(GET)*
+        - View user details by logged in user. 
+        - [Admin] View all user details
+      - *EDIT(PUT)*
+        - Modify user details by logged in user 
+      - *DELETE(DELETE)*
+        - [Admin] Delete a user 
+        - [NYI]
+          - Delete Own user account 
  
 
-## Approach - Server 2B - Auth
+## Authentication approach - Client 2B
 
 - Create "global" variables(functions) to be accessed anywhere in app w/testing.
   - [Auth]
@@ -51,6 +50,13 @@ The goal of this project is to create an app similar to Amazon. The customer wou
     - *CREATE(POST)*
       - Register newly created user
       - Login user by username/pw
+
+## Deployment Approach - 3B
+- After installing heroku cli and creating an app name ensure that:
+  - Config vars are in set in heroku & .env.local file is changed to server url address (heroku server url):
+    - <SERVER_URL> & <TOKEN_HEADER_KEY>.
+
+
 ### User Login and Registration
 
 - [References] Via Populi

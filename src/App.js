@@ -18,6 +18,8 @@ import AdminProducts from './Pages/AdminProducts';
 import AdminUsers from './Pages/AdminUsers';
 
 const urlEndpoint = process.env.REACT_APP_URL_ENDPOINT
+//https://e-commerce-server-jr.herokuapp.com/
+//http://localhost:4000
 const AdminLayout = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const { verifyAdmin } = useAuth();
@@ -51,8 +53,8 @@ function App() {
   const {user} = useAuth()
   const [orderHistory,setOrderHistory] = useState({message:[],success:true})
   const [singleUser,setSingleUser] = useState({message:null,success:true})
-  //fetch USERS/CARTS/PRODUCTS
-
+  
+  
   useEffect(() => {
     const fetchProductList = async () => {
       const url = `${urlEndpoint}/products?sortField=${sortField}&sortOrder=${sortOrder}&filterField=${filterField}&filterValue=${filterValue}&limit=${limit}&page=${page}`
@@ -65,78 +67,6 @@ function App() {
     fetchProductList()
   },[sortField,sortOrder,filterField,filterValue,page,limit])
  
-
-    //admin all users
-    const fetchUserList = async () => {
-      const url = `${urlEndpoint}/users/user-list`
-      const res = await fetch(url, {
-        method:"GET",
-        headers: {
-          "Content-Type":"application/json",
-          token:user
-        }
-      })
-      const resJSON = await res.json()
-      setUserList(resJSON)
-      console.log("fetchUserList()",resJSON)
-      return resJSON
-    }
- 
-
-
-    //admin all purchases
-    const fetchAllPurchases = async () => {
-      const url = `${urlEndpoint}/carts`
-      const res = await fetch(url, {
-        method:"GET",
-        headers: {
-          "Content-Type":"application/json",
-          token:user
-        }
-      })
-      const resJSON = await res.json()
-      setOrderHistory(resJSON)
-      console.log("fetchAllPurchases()",resJSON)
-      return resJSON
-    }
-  
-
-  //get order history by user
-  const fetchCartsByUser = async () => {
-      const url = `${urlEndpoint}/carts/user/order-history`
-      const res = await fetch(url, {
-        method:"GET",
-        headers: {
-          "Content-Type":"application/json",
-          token:user
-        }
-      })
-      const resJSON = await res.json()
-      setOrderHistory(resJSON)
-      console.log("fetchCartsByUser()",resJSON)
-      return resJSON
-    }
-     
-  //create product
-  const productSubmit = async (product) => {
-    const url = `${urlEndpoint}/products/create-product`
-    const res = await fetch(url, {
-      method:"POST",
-      headers: {
-        "Content-Type":"application/json"
-      },
-      body:JSON.stringify(product)
-    })
-    const resJSON = await res.json()
-  }
-  const fetchSingleProduct = async (productId) => {
-    const url = `${urlEndpoint}/products/${productId}`
-    const response = await fetch(url)
-    const resJSON = await response.json()
-    setSingleProd(resJSON)
-    console.log(resJSON)
-    return resJSON
-  }
   //see own user profile
   const fetchSingleUser = async () => {
     const url = `${urlEndpoint}/users/user/my-profile`
@@ -153,32 +83,98 @@ function App() {
       console.log("fetchSingleUser()",resJSON)
       return resJSON
   }
-  
+
+    //fetch one product
+   const fetchSingleProduct = async (productId) => {
+    const url = `${urlEndpoint}/products/${productId}`
+    const response = await fetch(url)
+    const resJSON = await response.json()
+    setSingleProd(resJSON)
+    console.log(resJSON)
+    return resJSON
+  }
+  //get order history by user
+  const fetchCartsByUser = async () => {
+      const url = `${urlEndpoint}/carts/user/order-history`
+      const res = await fetch(url, {
+        method:"GET",
+        headers: {
+          "Content-Type":"application/json",
+          token:user
+        }
+      })
+      const resJSON = await res.json()
+      setOrderHistory(resJSON)
+      console.log("fetchCartsByUser()",resJSON)
+      return resJSON
+    }
+     
+  //create product **ADMIN**
+  const productSubmit = async (product) => {
+    const url = `${urlEndpoint}/products/create-product`
+    const res = await fetch(url, {
+      method:"POST",
+      headers: {
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify(product)
+    })
+    const resJSON = await res.json()
+  }
+ 
+
+     //all users fetch **ADMIN**
+    const fetchUserList = async () => {
+      const url = `${urlEndpoint}/users/user-list`
+      const res = await fetch(url, {
+        method:"GET",
+        headers: {
+          "Content-Type":"application/json",
+          token:user
+        }
+      })
+      const resJSON = await res.json()
+      setUserList(resJSON)
+      console.log("fetchUserList()",resJSON)
+      return resJSON
+    }
+
+    //all purchases fetch **ADMIN**
+    const fetchAllPurchases = async () => {
+      const url = `${urlEndpoint}/carts`
+      const res = await fetch(url, {
+        method:"GET",
+        headers: {
+          "Content-Type":"application/json",
+          token:user
+        }
+      })
+      const resJSON = await res.json()
+      setOrderHistory(resJSON)
+      console.log("fetchAllPurchases()",resJSON)
+      return resJSON
+    }
   return (
     <div className="App">
-      {/* <header className="App-header"> */}
         <Routes>
           <Route path='/' element={<Navbar/>}>
             <Route index element={<HomePage />}/>
             <Route path="/products" element={<Products sortField={sortField} sortOrder={sortOrder} filterField={filterField} 
               filterValue={filterValue} limit={limit} page={page} setSortField={setSortField} setSortOrder={setSortOrder} 
               setFilterField={setFilterField} setFilterValue={setFilterValue} setLimit={setLimit} setPage={setPage}  productList={productList} fetchSingleProduct={fetchSingleProduct} urlEndpoint={urlEndpoint} singleProd={singleProd}/>}/>
-            {/* <Route path='/single-product' element={<SingleProduct fetchSingleProduct={fetchSingleProduct} product={product} />}/> */}
-            <Route path='/create-product' element={<CreateProduct productSubmit={productSubmit}/>}/>
-            <Route path="/users" element={<Users userList={userList}/>}/>
+            {/* <Route path="/users" element={<Users userList={userList}/>}/> */}
             <Route path='/users/my-profile' element={<UserProfile urlEndpoint={urlEndpoint} singleUser={singleUser} fetchSingleUser={fetchSingleUser}/>}/>
-            <Route path="/carts" element={<Carts orderHistory={orderHistory} urlEndpoint={urlEndpoint} fetchAllPurchases={fetchAllPurchases} />}/>
             <Route path='/carts/user/order-history' element={<CartsByUser orderHistory={orderHistory} fetchCartsByUser={fetchCartsByUser} />}/>
             <Route path='registration' element={<RegistrationPage />}/>
             <Route path='login' element={<LoginPage />}/>
             <Route path='admin' element={<AdminLayout/>}>
               <Route path='products' element={<AdminProducts productList={productList} fetchSingleProduct={fetchSingleProduct} singleProd={singleProd} urlEndpoint={urlEndpoint}/>}/>
               <Route path='/admin/users' element={<AdminUsers userList={userList} urlEndpoint={urlEndpoint} fetchUserList={fetchUserList}/>}/>
+              <Route path='/admin/create-product' element={<CreateProduct productSubmit={productSubmit}/>}/>
+              <Route path="/admin/carts" element={<Carts orderHistory={orderHistory} urlEndpoint={urlEndpoint} fetchAllPurchases={fetchAllPurchases} />}/>
             </Route>
-            {/* <Route path='/admin' element={<RegistrationPage/>}/> */}
           </Route>
         </Routes>
-      {/* </header> */}
     </div>
   );
 }

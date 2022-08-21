@@ -23,33 +23,29 @@ const Navbar = (props) => {
           {user && (
             <ul> 
               
-              <li >
+              {/* <li >
               <Link to="/">HomePage</Link>
-              </li>
+              </li> */}
               <li>
                <Link to="/products">Products</Link>
               </li>
-              <li>
-                <Link to="/single-product">Single Product by id</Link>
-              </li>
-              <li>
-                <Link to="/users/my-profile">MyProfile</Link>
-              </li>
-             
                <li>
                 <Link to="/carts/user/order-history">My Orders</Link>
               </li>
                <li>
-                <Link to="/carts">Admin-All Purchases</Link>
-              </li>
-              <li>
-                <Link to="/create-product">Admin-Create Product</Link>
+                <Link to="/admin/carts">Admin-All Purchases</Link>
               </li>
               <li>
               <Link to="/admin/products">Admin-Products</Link>
               </li>
               <li>
+                <Link to="/admin/create-product">Admin-Create Product</Link>
+              </li>
+              <li>
               <Link to="/admin/users">Admin-Users</Link>
+              </li>
+              <li>
+                <Link to="/users/my-profile">MyProfile</Link>
               </li>
               <span>
                 <strong>You are Logged in</strong>
