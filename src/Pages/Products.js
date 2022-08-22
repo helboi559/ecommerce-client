@@ -54,9 +54,9 @@ const Products = ({sortField,sortOrder,filterField,filterValue,page,limit,setSor
         <select value={sortField} onChange={(e) => {
           setSortField(e.target.value)
         }}>
-          {sortFieldOption.map((ele) =>{
+          {sortFieldOption.map((ele,index) =>{
             return (
-              <option value={ele}>{ele}</option>
+              <option key={`sortfield-option-${index}`} value={ele}>{ele}</option>
             )
           })}
         </select>
@@ -64,9 +64,9 @@ const Products = ({sortField,sortOrder,filterField,filterValue,page,limit,setSor
         <select value={sortOrder} onChange={(e) => {
           setSortOrder(e.target.value)
         }}>
-          {sortOrderOption.map((ele) =>{
+          {sortOrderOption.map((ele,index) =>{
             return (
-              <option value={ele}>{ele}</option>
+              <option key={`sortorder-option-${index}`} value={ele}>{ele}</option>
             )
           })}
         </select>
@@ -85,7 +85,7 @@ const Products = ({sortField,sortOrder,filterField,filterValue,page,limit,setSor
           setFilterValue(e.target.value)
         }} />
         <label> Page</label>
-        <input type="number" value={page} onChange={(e) => {
+        <input type="number" value={page} min={1} onChange={(e) => {
           setPage(Number(e.target.value))
         }} />
         <label> Limit</label>

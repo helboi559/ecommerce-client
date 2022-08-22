@@ -10,12 +10,12 @@ const AdminUsers = ({urlEndpoint,userList,fetchUserList}) => {
     const [userId,setUserId] = useState('')
     useEffect(()=> {
         fetchUserList()
-    },[])
+    },[user])
     const deleteUser = async(id) => {
         const url = `${urlEndpoint}/users/user-list/delete-user`
-        // setIsLoading(true)
         
-        // console.log(user.id)
+        // setUserId()
+        console.log("deleteUser()",id)
         const response = await fetch(url, {
             method: "DELETE",
             headers: {
@@ -23,11 +23,11 @@ const AdminUsers = ({urlEndpoint,userList,fetchUserList}) => {
                 token:user
             },
             body: JSON.stringify({
-                id:userId ,
+                id ,
             }),
         });
         const responseJSON = await response.json();
-        // setIsLoading(false)
+       
         return responseJSON
     }
     
@@ -45,9 +45,9 @@ const AdminUsers = ({urlEndpoint,userList,fetchUserList}) => {
                             <div>UserId-{oneUser.id}</div>
                             <div>Phone-{oneUser.phone}</div>
                             <button onClick={()=> {
-                                setUserId(oneUser.id)
-                                deleteUser()
-                                navigate('/admin/users')
+                                // setUserId(oneUser.id)
+                                deleteUser(oneUser.id)
+                                navigate('/users/my-profile')
                             }}>Delete User</button>
                             
                             {/* {Object.values(oneUser.name).map((userData)=> {

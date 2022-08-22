@@ -66,7 +66,7 @@ const AdminProducts = ({productList,fetchSingleProduct,urlEndpoint}) => {
       <div>{!success && message}</div>
       {success && (
         <section>
-          {message.map((product) => {
+          {message.map((product,index) => {
             const fetchProductAndShow = async () => {
               const response = await fetchSingleProduct(product.id)
               const resJSON = response.message
@@ -81,7 +81,7 @@ const AdminProducts = ({productList,fetchSingleProduct,urlEndpoint}) => {
             
             return (
               
-                <ProdAdminCard navigate={navigate} product={product} urlEndpoint={urlEndpoint} fetchProductAndShow={fetchProductAndShow}/>
+                <ProdAdminCard key={`admin-products-${index}-${product.id}`} navigate={navigate} product={product} urlEndpoint={urlEndpoint} fetchProductAndShow={fetchProductAndShow}/>
               
             )
           })}

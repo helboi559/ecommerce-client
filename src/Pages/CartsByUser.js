@@ -11,7 +11,11 @@ const CartsByUser = ({fetchCartsByUser,orderHistory}) => {
     useEffect(()=> {
       fetchCartsByUser()
     },[user])
-    
+    // const getTotal = (price,quantity) => {
+    //   let currTotal = 0
+    //   currTotal += price * quantity
+    //   return currTotal
+    // }
     //sort list by date DESC
     const sortByDate = (arr)=> {
       const deepCopy =  JSON.parse(JSON.stringify(arr))
@@ -41,7 +45,9 @@ const CartsByUser = ({fetchCartsByUser,orderHistory}) => {
                     <p>Price-${product.price}</p>
                     <p>Qty-{product.quantity}</p> 
                    </div>
-                    
+                    {/* <div>
+                      <p><strong>Total:{getTotal(product.price,product.quantity)}</strong></p>
+                    </div> */}
                   </div>
                 )
               })}

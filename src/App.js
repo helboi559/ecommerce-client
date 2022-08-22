@@ -22,7 +22,7 @@ const urlEndpoint = process.env.REACT_APP_URL_ENDPOINT
 //http://localhost:4000
 const AdminLayout = () => {
   const [isAdmin, setIsAdmin] = useState(false);
-  const { verifyAdmin } = useAuth();
+  const { verifyAdmin, user} = useAuth();
 
   useEffect(() => {
     const isAdminCheck = async () => {
@@ -30,7 +30,7 @@ const AdminLayout = () => {
       setIsAdmin(isAdmin);
     };
     isAdminCheck();
-  }, []); // This useEffect will trigger once when the user tries to visit /admin
+  }, [user]); // This useEffect will trigger once when the user tries to visit /admin
 
   return (
     <div>
@@ -40,9 +40,9 @@ const AdminLayout = () => {
   );
 };
 function App() {
-  const [productList,setProductList] = useState({message:[],success:true})
+  const [productList,setProductList] = useState({message:[],success:false})
   const [singleProd,setSingleProd] = useState({message:null,success:true})
-  const [userList,setUserList] = useState({message:[],success:true})
+  const [userList,setUserList] = useState({message:[],success:false})
   // const [cartList,setCartList] = useState([])
   const [sortField,setSortField] = useState('title')
   const [sortOrder,setSortOrder] = useState("asc")
@@ -52,7 +52,7 @@ function App() {
   const [limit,setLimit] = useState(100)
   const {user} = useAuth()
   const [orderHistory,setOrderHistory] = useState({message:[],success:true})
-  const [singleUser,setSingleUser] = useState({message:null,success:true})
+  const [singleUser,setSingleUser] = useState({message:null,success: false})
   
   
   useEffect(() => {
@@ -60,7 +60,7 @@ function App() {
       const url = `${urlEndpoint}/products?sortField=${sortField}&sortOrder=${sortOrder}&filterField=${filterField}&filterValue=${filterValue}&limit=${limit}&page=${page}`
       const res = await fetch(url)
       const resJSON = await res.json()
-      // console.log(resJSON.message)
+      console.log("fetchProductList()",resJSON)
       setProductList(resJSON)
       return resJSON
     }
@@ -90,7 +90,7 @@ function App() {
     const response = await fetch(url)
     const resJSON = await response.json()
     setSingleProd(resJSON)
-    console.log(resJSON)
+    console.log("fetchSingleProduct()",resJSON)
     return resJSON
   }
   //get order history by user

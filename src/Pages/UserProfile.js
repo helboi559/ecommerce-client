@@ -14,7 +14,7 @@ const UserProfile = ({singleUser,fetchSingleUser,urlEndpoint}) => {
     const navigate = useNavigate()
     useEffect(()=> {
         fetchSingleUser()
-    },[])
+    },[user])
     
     const putUpdatedProfile = async() => {
         const url = `${urlEndpoint}/users/user/my-profile/edit-user`
@@ -54,17 +54,17 @@ const UserProfile = ({singleUser,fetchSingleUser,urlEndpoint}) => {
         </ModalUserProfile>
         
         <div>{!success && message}</div>
+        {/* {console.log(success)} */}
         {!!success && (
             <div className='user-profile'>
                 <div >UserName:{message.username}</div>
-                {/* {console.log(message.email)} */}
                 <div>Email:{message.email}</div>
                 <div>Phone#:{message.phone}</div>
-                <div>Id:{message.id}</div>
+                <div>UserId:{message.id}</div>
                 <button onClick={() => {
                     setEmail(message.email)
                     setPhone(message.phone)
-                    // setPassword(message.password)
+                    
                     setShow(true)
                 }}>Edit Profile</button>
 
