@@ -9,7 +9,7 @@ const sortFieldOption = ["title","category","price"]
 const sortOrderOption = ["asc","desc"]
 const filterFieldOption = ["title","category"]
 
-const Products = ({sortField,sortOrder,filterField,filterValue,page,limit,setSortField,setSortOrder,setFilterField,setFilterValue,setPage,setLimit,productList,fetchSingleProduct,urlEndpoint,singleProd}) => {
+const Products = ({sortField,sortOrder,filterField,filterValue,page,limit,setSortField,setSortOrder,setFilterField,setFilterValue,setPage,setLimit,productList,fetchSingleProduct,urlEndpoint,singleProd,removeFromBasket,addToBasket}) => {
   const [show,setShow] = useState(false)
   const {message,success} = productList
   const [title,setTitle] = useState('')
@@ -17,34 +17,6 @@ const Products = ({sortField,sortOrder,filterField,filterValue,page,limit,setSor
   const [category,setCategory] = useState('')
   const [description,setDescription] = useState('')
   const [image,setImage] = useState('')
-  const [cartItems,setCartItems] = useState([])
-  const addToBasket = (product) => {
-    //MAKE DEEP COPY FIRST!!!
-    const deepCopy = JSON.parse(JSON.stringify(product))
-    //returns matching item if it exists in basket or undefined
-    const exists = cartItems.find(ele => ele.id === deepCopy.id )
-    if(exists) {
-      setCartItems(cartItems.map(ele => ele.id === deepCopy.id ? {...exists, quantity:exists.quantity +1} : ele))
-      console.log("exists true")
-    } else {
-      setCartItems([...cartItems,{...deepCopy, quantity:1 }])
-      console.log('exists false')
-    }
-    
-  }
-  const removeFromBasket = (product) => {
-    //deep copy
-    const deepCopy = JSON.parse(JSON.stringify(product))
-    const exists = cartItems.find(ele => ele.id === deepCopy.id )
-    //if basket item qty is 1
-    if(exists.quantity === 1) {
-      setCartItems(cartItems.filter((ele) => ele.id !== deepCopy.id ))
-      console.log("exists exists with quantity of 1")
-    } else {
-      setCartItems(cartItems.map(ele => ele.id === deepCopy.id ? {...exists, quantity:exists.quantity - 1} : ele))
-    }
-  }
-  
   
   return (
     <div className="">
@@ -94,7 +66,7 @@ const Products = ({sortField,sortOrder,filterField,filterValue,page,limit,setSor
         }} />
 
       </div>
-      <Basket urlEndpoint={urlEndpoint} removeFromBasket={removeFromBasket} addToBasket={addToBasket} cartItems={cartItems} />
+     
       
       <ModalProductUser title={title} show={show} onClose={() => setShow(false)}>
         <label><strong>Description:</strong></label>

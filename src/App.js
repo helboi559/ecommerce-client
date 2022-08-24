@@ -16,6 +16,7 @@ import CartsByUser from './Pages/CartsByUser';
 import UserProfile from './Pages/UserProfile';
 import AdminProducts from './Pages/AdminProducts';
 import AdminUsers from './Pages/AdminUsers';
+import UserCheckout from './Pages/UserCheckout';
 
 const urlEndpoint = process.env.REACT_APP_URL_ENDPOINT
 //https://e-commerce-server-jr.herokuapp.com/
@@ -55,7 +56,36 @@ function App() {
   const [singleUser,setSingleUser] = useState({message:null,success: false})
   const [productListLoading,setProductListLoading] = useState(false)
   const [userListLoading,setUserListLoading] = useState(false)
+  const [showCart,setShowCart] = useState(true)
+  const [cartItems,setCartItems] = useState([])
   
+  //addtoBasket
+  const addToBasket = (product) => {
+    //MAKE DEEP COPY FIRST!!!
+    const deepCopy = JSON.parse(JSON.stringify(product))
+    //returns matching item if it exists in basket or undefined
+    const exists = cartItems.find(ele => ele.id === deepCopy.id )
+    if(exists) {
+      setCartItems(cartItems.map(ele => ele.id === deepCopy.id ? {...exists, quantity:exists.quantity +1} : ele))
+      console.log("exists true")
+    } else {
+      setCartItems([...cartItems,{...deepCopy, quantity:1 }])
+      console.log('addToBasket()',cartItems)
+    }
+    
+  }
+  const removeFromBasket = (product) => {
+    //deep copy
+    const deepCopy = JSON.parse(JSON.stringify(product))
+    const exists = cartItems.find(ele => ele.id === deepCopy.id )
+    //if basket item qty is 1
+    if(exists.quantity === 1) {
+      setCartItems(cartItems.filter((ele) => ele.id !== deepCopy.id ))
+      console.log("exists exists with quantity of 1")
+    } else {
+      setCartItems(cartItems.map(ele => ele.id === deepCopy.id ? {...exists, quantity:exists.quantity - 1} : ele))
+    }
+  }
   useEffect(() => {
     const fetchProductList = async () => {
       const url = `${urlEndpoint}/products?sortField=${sortField}&sortOrder=${sortOrder}&filterField=${filterField}&filterValue=${filterValue}&limit=${limit}&page=${page}`
@@ -165,13 +195,14 @@ function App() {
   return (
     <div className="App">
         <Routes>
-          <Route path='/' element={<Navbar/>}>
+          <Route path='/' element={<Navbar setShowCart={setShowCart} size={cartItems.length}/>}>
             <Route index element={<HomePage />}/>
-            <Route path="/products" element={<Products sortField={sortField} sortOrder={sortOrder} filterField={filterField} 
+            <Route path="/products" element={<Products addToBasket={addToBasket}  sortField={sortField} sortOrder={sortOrder} filterField={filterField} 
               filterValue={filterValue} limit={limit} page={page} setSortField={setSortField} setSortOrder={setSortOrder} 
               setFilterField={setFilterField} setFilterValue={setFilterValue} setLimit={setLimit} setPage={setPage}  productList={productList} fetchSingleProduct={fetchSingleProduct} urlEndpoint={urlEndpoint} singleProd={singleProd}/>}/>
             {/* <Route path="/users" element={<Users userList={userList}/>}/> */}
             <Route path='/users/my-profile' element={<UserProfile urlEndpoint={urlEndpoint} singleUser={singleUser} fetchSingleUser={fetchSingleUser}/>}/>
+            <Route path='/products/checkout' element={<UserCheckout cartItems={cartItems} setCartItems={setCartItems} removeFromBasket={removeFromBasket} addToBasket={addToBasket} urlEndpoint={urlEndpoint}/>}/>
             <Route path='/carts/user/order-history' element={<CartsByUser orderHistory={orderHistory} fetchCartsByUser={fetchCartsByUser} />}/>
             <Route path='registration' element={<RegistrationPage />}/>
             <Route path='login' element={<LoginPage />}/>

@@ -3,8 +3,9 @@ import { Outlet,Link } from 'react-router-dom'
 import {useAuth} from "../Hooks/Auth"
 // import {Navlink} from "react-router-dom"
 import NavbarStyles from "../Styles/NavbarStyles.css"
-const Navbar = (props) => {
+const Navbar = ({size,setShowCart}) => {
   const {user,logout} = useAuth()
+  console.log("cart size",size)
   return (
     <div>
       <nav className='nav'>
@@ -47,9 +48,13 @@ const Navbar = (props) => {
               <li>
                 <Link to="/users/my-profile">MyProfile</Link>
               </li>
+              <li>
+                <Link to="/products/checkout">Checkout-{size}</Link>
+              </li>
               <span>
                 <strong>You are Logged in</strong>
               </span>
+
               <button onClick={async () => {
                 await logout()
               }}>Logout</button>
