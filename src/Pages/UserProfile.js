@@ -10,15 +10,15 @@ const UserProfile = ({singleUser,fetchSingleUser,urlEndpoint}) => {
     const [phone,setPhone] = useState('')
     const [password,setPassword] = useState('')
     const [show,setShow] = useState(false)
-
+    const [userLoading,setUserLoading]=useState(false)
     const navigate = useNavigate()
     useEffect(()=> {
         fetchSingleUser()
-    },[user])
+    },[user,userLoading])
     
     const putUpdatedProfile = async() => {
         const url = `${urlEndpoint}/users/user/my-profile/edit-user`
-        
+        setUserLoading(true)
         const response = await fetch(url, {
             method: "PUT",
             headers: {
@@ -32,7 +32,8 @@ const UserProfile = ({singleUser,fetchSingleUser,urlEndpoint}) => {
             }),
         });
         const responseJSON = await response.json();
-        
+        setUserLoading(false)
+        setShow(false)
         return responseJSON
     }
     return (

@@ -53,19 +53,22 @@ function App() {
   const {user} = useAuth()
   const [orderHistory,setOrderHistory] = useState({message:[],success:true})
   const [singleUser,setSingleUser] = useState({message:null,success: false})
-  
+  const [productListLoading,setProductListLoading] = useState(false)
+  const [userListLoading,setUserListLoading] = useState(false)
   
   useEffect(() => {
     const fetchProductList = async () => {
       const url = `${urlEndpoint}/products?sortField=${sortField}&sortOrder=${sortOrder}&filterField=${filterField}&filterValue=${filterValue}&limit=${limit}&page=${page}`
       const res = await fetch(url)
+      // setIsPageLoading(true)
       const resJSON = await res.json()
+      // setIsPageLoading(false)
       console.log("fetchProductList()",resJSON)
       setProductList(resJSON)
       return resJSON
     }
     fetchProductList()
-  },[sortField,sortOrder,filterField,filterValue,page,limit])
+  },[sortField,sortOrder,filterField,filterValue,page,limit,productListLoading])
  
   //see own user profile
   const fetchSingleUser = async () => {
@@ -111,6 +114,7 @@ function App() {
      
   //create product **ADMIN**
   const productSubmit = async (product) => {
+    setProductListLoading(true)
     const url = `${urlEndpoint}/products/create-product`
     const res = await fetch(url, {
       method:"POST",
@@ -120,11 +124,11 @@ function App() {
       body:JSON.stringify(product)
     })
     const resJSON = await res.json()
+    setProductListLoading(false)
   }
- 
-
-     //all users fetch **ADMIN**
-    const fetchUserList = async () => {
+    //all users fetch **ADMIN**
+    useEffect(()=> {
+      const fetchUserList = async () => {
       const url = `${urlEndpoint}/users/user-list`
       const res = await fetch(url, {
         method:"GET",
@@ -137,7 +141,11 @@ function App() {
       setUserList(resJSON)
       console.log("fetchUserList()",resJSON)
       return resJSON
-    }
+      }
+      fetchUserList()
+    },[user,userListLoading])
+     
+    
 
     //all purchases fetch **ADMIN**
     const fetchAllPurchases = async () => {
@@ -168,8 +176,8 @@ function App() {
             <Route path='registration' element={<RegistrationPage />}/>
             <Route path='login' element={<LoginPage />}/>
             <Route path='admin' element={<AdminLayout/>}>
-              <Route path='products' element={<AdminProducts productList={productList} fetchSingleProduct={fetchSingleProduct} singleProd={singleProd} urlEndpoint={urlEndpoint}/>}/>
-              <Route path='/admin/users' element={<AdminUsers userList={userList} urlEndpoint={urlEndpoint} fetchUserList={fetchUserList}/>}/>
+              <Route path='products' element={<AdminProducts setProductListLoading={setProductListLoading} productList={productList} fetchSingleProduct={fetchSingleProduct} singleProd={singleProd} urlEndpoint={urlEndpoint}/>}/>
+              <Route path='/admin/users' element={<AdminUsers userList={userList} urlEndpoint={urlEndpoint} setUserListLoading={setUserListLoading}/>}/>
               <Route path='/admin/create-product' element={<CreateProduct productSubmit={productSubmit}/>}/>
               <Route path="/admin/carts" element={<Carts orderHistory={orderHistory} urlEndpoint={urlEndpoint} fetchAllPurchases={fetchAllPurchases} />}/>
             </Route>

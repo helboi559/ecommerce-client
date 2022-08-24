@@ -5,9 +5,8 @@ import { useAuth } from '../Hooks/Auth'
 import BasketProducts from "../Styles/BasketProducts.css"
 
 const Basket = ({cartItems,addToBasket,removeFromBasket,urlEndpoint}) => {
-  // console.log(cartItems)
   const {user} = useAuth()
-  // console.log(verifyAdmin)
+  
   const [total,setTotal] = useState(0)
   const navigate = useNavigate()
   //update total helper function
@@ -26,6 +25,7 @@ const Basket = ({cartItems,addToBasket,removeFromBasket,urlEndpoint}) => {
     const data = {
       products:cartItems
     }
+    
     const response = await fetch(url, {
       method:"POST",
       headers: {
@@ -35,6 +35,7 @@ const Basket = ({cartItems,addToBasket,removeFromBasket,urlEndpoint}) => {
       body:JSON.stringify(data)
     })
     const resJSON = await response.json()
+    
   }
   return (
     <div className='basket'>

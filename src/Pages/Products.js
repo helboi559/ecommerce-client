@@ -121,7 +121,7 @@ const Products = ({sortField,sortOrder,filterField,filterValue,page,limit,setSor
             }
             return (
               
-                <ProdUserCard key={product.id} addToBasket={addToBasket} product={product} fetchProductAndShow={fetchProductAndShow}/>
+                <ProdUserCard key={`product-id-${product.id}`} addToBasket={addToBasket} product={product} fetchProductAndShow={fetchProductAndShow}/>
               
             );
           })}

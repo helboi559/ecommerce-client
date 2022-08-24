@@ -5,24 +5,21 @@ import ProdAdminCard from '../Components/ProdAdminCard'
 import { useAuth } from '../Hooks/Auth'
 import {useNavigate} from "react-router-dom"
 // import ProductCard from "../Styles/ProductCard.css"
-const AdminProducts = ({productList,fetchSingleProduct,urlEndpoint}) => {
+const AdminProducts = ({setProductListLoading,productList,fetchSingleProduct,urlEndpoint}) => {
   const {message,success}=productList
   const [show,setShow] = useState(false)
-  const {user,login} = useAuth()
-  // console.log(login)
   const [title,setTitle] = useState('')
   const [price,setPrice] = useState(0)
   const [category,setCategory] = useState('')
   const [description,setDescription] = useState('')
   const [prodId,setProdId] = useState(null)
-  const [isLoading,setIsLoading] = useState(false)
-  // useEffect(()=> {
-
-  // },[price,title,category,description])
+  const {user} = useAuth()
+  
+  
   const navigate = useNavigate()
   const putUpdatedProduct = async()=> {
     const url = `${urlEndpoint}/products/edit-product`
-    setIsLoading(true)
+    setProductListLoading(true)
     const response = await fetch(url, {
             method: "PUT",
             headers: {
@@ -38,7 +35,8 @@ const AdminProducts = ({productList,fetchSingleProduct,urlEndpoint}) => {
             }),
         });
         const responseJSON = await response.json();
-        setIsLoading(false)
+        setProductListLoading(false)
+        setShow(false)
         return responseJSON
   }
   
@@ -67,6 +65,7 @@ const AdminProducts = ({productList,fetchSingleProduct,urlEndpoint}) => {
       {success && (
         <section>
           {message.map((product,index) => {
+            //disp[play product details
             const fetchProductAndShow = async () => {
               const response = await fetchSingleProduct(product.id)
               const resJSON = response.message
@@ -78,10 +77,28 @@ const AdminProducts = ({productList,fetchSingleProduct,urlEndpoint}) => {
               setDescription(resJSON.description)
               setShow(true)
             }
-            
+            //DELETE item
+            const deleteProduct = async()=> {
+              const url = `${urlEndpoint}/products/delete-product`
+              setProductListLoading(true)
+              console.log(product.id)
+              const response = await fetch(url, {
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json",
+                        token:user
+                    },
+                    body: JSON.stringify({
+                        id: product.id,
+                    }),
+                });
+              const responseJSON = await response.json();
+              setProductListLoading(false)
+              return responseJSON
+            }
             return (
               
-                <ProdAdminCard key={`admin-products-${index}-${product.id}`} navigate={navigate} product={product} urlEndpoint={urlEndpoint} fetchProductAndShow={fetchProductAndShow}/>
+                <ProdAdminCard key={`admin-products-${index}-${product.id}`} deleteProduct={deleteProduct} navigate={navigate} product={product} urlEndpoint={urlEndpoint} fetchProductAndShow={fetchProductAndShow}/>
               
             )
           })}

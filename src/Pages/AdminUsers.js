@@ -3,18 +3,18 @@ import { useAuth } from '../Hooks/Auth'
 import { useState,useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const AdminUsers = ({urlEndpoint,userList,fetchUserList}) => {
+const AdminUsers = ({urlEndpoint,userList,setUserListLoading}) => {
     const {message,success}=userList
     const navigate = useNavigate()
     const {user} = useAuth()
     const [userId,setUserId] = useState('')
-    useEffect(()=> {
-        fetchUserList()
-    },[user])
+    // useEffect(()=> {
+    //     fetchUserList()
+    // },[user])
     const deleteUser = async(id) => {
         const url = `${urlEndpoint}/users/user-list/delete-user`
         
-        // setUserId()
+        setUserListLoading(true)
         console.log("deleteUser()",id)
         const response = await fetch(url, {
             method: "DELETE",
@@ -27,7 +27,7 @@ const AdminUsers = ({urlEndpoint,userList,fetchUserList}) => {
             }),
         });
         const responseJSON = await response.json();
-       
+       setUserListLoading(false)
         return responseJSON
     }
     
@@ -47,7 +47,7 @@ const AdminUsers = ({urlEndpoint,userList,fetchUserList}) => {
                             <button onClick={()=> {
                                 // setUserId(oneUser.id)
                                 deleteUser(oneUser.id)
-                                navigate('/users/my-profile')
+                                navigate('/admin/users')
                             }}>Delete User</button>
                             
                             {/* {Object.values(oneUser.name).map((userData)=> {

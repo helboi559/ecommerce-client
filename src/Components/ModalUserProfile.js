@@ -18,7 +18,7 @@ const ModalUserProfile = (props) => {
                 <button className="button" onClick={(props.onClose)}>Close</button>
                 <button className="button" onClick={()=> {
                   props.putUpdatedProfile()
-                  props.navigate('/products')
+                  props.navigate('/users/my-profile')
                 }}>Update Profile</button>
             </div>
 

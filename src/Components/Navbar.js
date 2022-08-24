@@ -2,7 +2,7 @@ import React from 'react'
 import { Outlet,Link } from 'react-router-dom'
 import {useAuth} from "../Hooks/Auth"
 // import {Navlink} from "react-router-dom"
-import NavbarStyles from "./NavbarStyles.css"
+import NavbarStyles from "../Styles/NavbarStyles.css"
 const Navbar = (props) => {
   const {user,logout} = useAuth()
   return (
