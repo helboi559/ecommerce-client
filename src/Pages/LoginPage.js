@@ -2,17 +2,18 @@ import React from 'react'
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Hooks/Auth";
 import {useState} from "react"
-
+import AuthUser from "../Styles/AuthUser.css"
 const LoginPage = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginMessage, setLoginMessage] = useState("");
   const { login } = useAuth();
   return (
-    <div>
-      <h1>Login Page</h1>
-      <h3>{loginMessage}</h3>
-      <label>Username</label>
+    <div className='auth-cont'>
+      <h1>Login</h1>
+      <div className='login-message'>{loginMessage}</div>
+      <div className="auth-details">
+        <label>Username</label>
       <input
         type="text"
         onChange={(e) => {
@@ -36,6 +37,8 @@ const LoginPage = (props) => {
       >
         Login
       </button>
+      </div>
+      
     </div>
   );
 };

@@ -3,6 +3,7 @@ import { useEffect ,useState} from 'react'
 import ModalUserProfile from '../Components/ModalUserProfile'
 import { useAuth } from '../Hooks/Auth'
 import { useNavigate } from 'react-router-dom'
+import AuthUser from "../Styles/AuthUser.css"
 const UserProfile = ({singleUser,fetchSingleUser,urlEndpoint}) => {
     const {message,success} = singleUser
     const {user} = useAuth()
@@ -40,28 +41,36 @@ const UserProfile = ({singleUser,fetchSingleUser,urlEndpoint}) => {
     <div>
         <h1>User Profile</h1><hr />
         <ModalUserProfile navigate={navigate} putUpdatedProfile={putUpdatedProfile} show={show} onClose={()=>setShow(false)}>
-        <label>Email</label>
-        <input type="text" value={email} onChange={(e)=> {
-            setEmail(e.target.value)
-        }}/>
-        <label>Phone</label>
-        <input type="text" value={phone} onChange={(e)=> {
-            setPhone(e.target.value)
-        }}/>
-        <label>New Password</label>
-        <input type="password"  onChange={(e)=> {
-            setPassword(e.target.value)
-        }}/>
+        <div className="user-profile-inputs">
+            <label>Email</label>
+            <input type="text" value={email} onChange={(e)=> {
+                setEmail(e.target.value)
+            }}/>
+            <label>Phone</label>
+            <input type="text" value={phone} onChange={(e)=> {
+                setPhone(e.target.value)
+            }}/>
+            <label>New Password</label>
+            <input type="password"  onChange={(e)=> {
+                setPassword(e.target.value)
+            }}/>
+        </div>
+        
         </ModalUserProfile>
         
         <div>{!success && message}</div>
         {/* {console.log(success)} */}
         {!!success && (
             <div className='user-profile'>
-                <div >UserName:{message.username}</div>
-                <div>Email:{message.email}</div>
-                <div>Phone#:{message.phone}</div>
-                <div>UserId:{message.id}</div>
+                <div>UserName: </div>
+                <span>{message.username}</span>
+                <div >Email:</div>
+                <span>{message.email}</span>
+                <div >Phone:</div>
+                <span>{message.phone}</span> 
+                <div >UserId:</div>
+                <span>{message.id}</span>
+
                 <button onClick={() => {
                     setEmail(message.email)
                     setPhone(message.phone)

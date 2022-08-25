@@ -2,7 +2,6 @@ import React from 'react'
 import ModalProductUser from '../Components/ModalProductUser'
 import {useState} from "react"
 import ProdUserCard from '../Components/ProdUserCard'
-import Basket from '../Components/Basket'
 import ProductCard from "../Styles/ProductCard.css"
 //set global filter values 
 const sortFieldOption = ["title","category","price"]
@@ -19,7 +18,7 @@ const Products = ({sortField,sortOrder,filterField,filterValue,page,limit,setSor
   const [image,setImage] = useState('')
   
   return (
-    <div className="">
+    <div >
       <div>{!success && message}</div>
       <div className="">
           <label>SortField</label>
@@ -78,7 +77,7 @@ const Products = ({sortField,sortOrder,filterField,filterValue,page,limit,setSor
       </ModalProductUser>
       
       {!!success && (
-        <section>
+        <section >
           {message.map((product) => {
             // console.log(product)
             const fetchProductAndShow = async () => {

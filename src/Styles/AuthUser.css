@@ -1,0 +1,67 @@
+
+.auth-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #333;
+    margin: 14em;
+    width: 50%;
+    position: relative;
+    top: -10em;
+}
+
+.auth-details label {
+    font-weight: bold;
+    color: white;
+}
+.auth-details input {
+    width: 45%;
+}
+.auth-details button {
+   background-color: rgb(208, 238, 33);
+   padding: 2px;
+}
+
+.login-message {
+    color: red;
+}
+
+.user-profile {
+    background-color: #333;
+    color: white;
+    
+}
+
+.user-profile div{
+    font-weight: bold;
+}
+
+.user-profile span {
+    display: flex;
+    flex-direction: column;
+    
+
+}
+
+.user-profile button {
+    padding: 8px 10px;
+    font-weight: bold;
+    background-color: rgb(208, 238, 33);
+    margin: 1em;
+}
+
+.user-profile-inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.user-profile-inputs label{
+    font-weight: bold;
+    color: black;
+}
+
+.user-profile-inputs input {
+    width: 50%;
+}
+

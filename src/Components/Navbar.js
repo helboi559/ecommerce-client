@@ -1,11 +1,10 @@
 import React from 'react'
 import { Outlet,Link } from 'react-router-dom'
 import {useAuth} from "../Hooks/Auth"
-// import {Navlink} from "react-router-dom"
 import NavbarStyles from "../Styles/NavbarStyles.css"
 const Navbar = ({size,setShowCart}) => {
   const {user,logout} = useAuth()
-  console.log("cart size",size)
+  // console.log("cart size",size)
   return (
     <div>
       <nav className='nav'>
@@ -13,10 +12,13 @@ const Navbar = ({size,setShowCart}) => {
           {!user && (
             <ul>
               <li >
-                <Link to="/registration">Registration Page</Link>
+              <Link to="/">Home</Link>
+              </li>
+              <li >
+                <Link to="/registration">Register</Link>
               </li>
               <li>
-                <Link to="/login">Login Page</Link>
+                <Link to="/login">Login</Link>
               </li>
             </ul>
           )}
@@ -24,11 +26,9 @@ const Navbar = ({size,setShowCart}) => {
           {user && (
             <ul> 
               
-              {/* <li >
-              <Link to="/">HomePage</Link>
-              </li> */}
+              
               <li>
-               <Link to="/products">Products</Link>
+               <Link to="/products">Home</Link>
               </li>
                <li>
                 <Link to="/carts/user/order-history">My Orders</Link>
@@ -48,11 +48,16 @@ const Navbar = ({size,setShowCart}) => {
               <li>
                 <Link to="/users/my-profile">MyProfile</Link>
               </li>
-              <li>
-                <Link to="/products/checkout">Checkout-{size}</Link>
+              <li className='nav-box'>
+                <Link to="/products/checkout">
+                  <span><img src="https://cdn.pixabay.com/photo/2013/07/12/14/53/cart-148964__340.png" alt="" /></span>
+                  <span>{size}</span>
+  
+                  </Link>
+                
               </li>
-              <span>
-                <strong>You are Logged in</strong>
+              <span className='login-status'>
+                <p>Logged in</p>
               </span>
 
               <button onClick={async () => {

@@ -1,7 +1,7 @@
 import React from 'react'
 import {useState} from "react"
 import { useAuth } from "../Hooks/Auth";
-
+import AuthUser from "../Styles/AuthUser.css"
 const RegistrationPage = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -9,9 +9,10 @@ const RegistrationPage = (props) => {
   const [phone, setPhone] = useState("");
   const { login, register } = useAuth();
   return (
-    <div>
-      <h1>Registration Page</h1>
-      <label>Username</label>
+    <div className='auth-cont'>
+      <h1>Register</h1>
+      <div className="auth-details">
+        <label>Username</label>
       <input
         type="text"
         onChange={(e) => {
@@ -43,13 +44,16 @@ const RegistrationPage = (props) => {
         onClick={async () => {
           const registerResult = await register(username, password,email,phone);
           if (registerResult.success) {
-            const redirectLocation = "/";
+            const redirectLocation = "/products";
             await login(username, password, redirectLocation);
           }
         }}
       >
         Signup
       </button>
+
+      </div>
+      
     </div>
   );
 };

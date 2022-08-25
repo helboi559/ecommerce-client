@@ -36,3 +36,24 @@ top: 0;
 .nav li:hover {
     background-color: #777;
 }
+
+.nav img{
+    width: 30px;
+    height: 30px;
+    /* background-color: rgb(138, 216, 21); */
+    background-color: rgb(208, 238, 33);
+}
+.nav-box span:nth-child(2){
+    padding: 0 3px;
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    position: relative;
+    top: -11px;
+}
+
+.nav .login-status {
+    position: relative;
+    bottom: -10px;
+    font-weight: bold;
+}

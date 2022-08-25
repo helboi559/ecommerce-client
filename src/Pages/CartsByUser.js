@@ -42,8 +42,8 @@ const CartsByUser = ({fetchCartsByUser,orderHistory}) => {
                        <p>{product.title}</p>
                     </div>
                    <div className="item-details">
-                    <p>Price-${product.price}</p>
                     <p>Qty-{product.quantity}</p> 
+                    <p>Price-${product.price}</p>
                    </div>
                     {/* <div>
                       <p><strong>Total:{getTotal(product.price,product.quantity)}</strong></p>

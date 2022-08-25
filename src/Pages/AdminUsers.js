@@ -40,10 +40,15 @@ const AdminUsers = ({urlEndpoint,userList,setUserListLoading}) => {
                 {message.map((oneUser) => {
                     return(
                         <div className='user-profile' key={`user-id-${oneUser.id}`}>
-                           <div>Username-{oneUser.username}</div>
-                            <div>Email-{oneUser.email}</div>
-                            <div>UserId-{oneUser.id}</div>
-                            <div>Phone-{oneUser.phone}</div>
+                           <div>UserName: </div>
+                            <span>{oneUser.username}</span>
+                            <div >Email:</div>
+                            <span>{oneUser.email}</span>
+                            <div >Phone:</div>
+                            <span>{oneUser.phone}</span> 
+                            <div >UserId:</div>
+                            <span>{oneUser.id}</span>
+
                             <button onClick={()=> {
                                 // setUserId(oneUser.id)
                                 deleteUser(oneUser.id)

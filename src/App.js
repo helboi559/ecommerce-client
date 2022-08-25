@@ -196,8 +196,8 @@ function App() {
     <div className="App">
         <Routes>
           <Route path='/' element={<Navbar setShowCart={setShowCart} size={cartItems.length}/>}>
-            <Route index element={<HomePage />}/>
-            <Route path="/products" element={<Products addToBasket={addToBasket}  sortField={sortField} sortOrder={sortOrder} filterField={filterField} 
+            <Route index element={<HomePage productList={productList}/>}/>
+            <Route path="/products" element={<Products key={`products-list`} addToBasket={addToBasket}  sortField={sortField} sortOrder={sortOrder} filterField={filterField} 
               filterValue={filterValue} limit={limit} page={page} setSortField={setSortField} setSortOrder={setSortOrder} 
               setFilterField={setFilterField} setFilterValue={setFilterValue} setLimit={setLimit} setPage={setPage}  productList={productList} fetchSingleProduct={fetchSingleProduct} urlEndpoint={urlEndpoint} singleProd={singleProd}/>}/>
             {/* <Route path="/users" element={<Users userList={userList}/>}/> */}

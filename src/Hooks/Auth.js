@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   // call this function when you want to authenticate the user
-  const login = async (username, password, redirectLocation = "/") => {
+  const login = async (username, password, redirectLocation = "/products") => {
     setIsAuthLoading(true);
     const loginResult = await loginUser(username, password);
     if (loginResult.success) {

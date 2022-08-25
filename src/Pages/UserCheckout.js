@@ -2,7 +2,7 @@ import React from 'react'
 import {useNavigate} from 'react-router-dom'
 import {useState,useEffect} from "react"
 import { useAuth } from '../Hooks/Auth'
-
+import BasketProducts from "../Styles/BasketProducts.css"
 const UserCheckout = ({cartItems,setCartItems,urlEndpoint,addToBasket,removeFromBasket}) => {
     const {user} = useAuth()
   
@@ -39,7 +39,7 @@ const UserCheckout = ({cartItems,setCartItems,urlEndpoint,addToBasket,removeFrom
     }
     return (
     <div className='basket'>
-        <h3>Basket</h3>
+        <h1>Checkout</h1>
         <div className='empty-basket'>{cartItems.length === 0 && <p>Cart Is Empty!</p> }</div>
         {cartItems.map((item) => (
           <div key={item.id} className="basket-box">
@@ -62,7 +62,7 @@ const UserCheckout = ({cartItems,setCartItems,urlEndpoint,addToBasket,removeFrom
         {cartItems.length !== 0 && (
           <div>
             <div className='total'>
-              <span>Total Price for your Basket</span>
+              <span>Total Price for your cart:</span>
               <span>${total}</span>
             </div>
             <button className="purchase" onClick={() => {
