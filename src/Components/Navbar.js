@@ -34,13 +34,13 @@ const Navbar = ({size,setShowCart}) => {
                 <Link to="/carts/user/order-history">My Orders</Link>
               </li>
                <li>
-                <Link to="/admin/carts">Admin-All Purchases</Link>
+                <Link to="/admin/carts">Admin-All Orders</Link>
               </li>
               <li>
               <Link to="/admin/products">Admin-Products</Link>
               </li>
               <li>
-                <Link to="/admin/create-product">Admin-Create Product</Link>
+                <Link to="/admin/create-product">Admin-Add Product</Link>
               </li>
               <li>
               <Link to="/admin/users">Admin-Users</Link>

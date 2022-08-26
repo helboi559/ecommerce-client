@@ -13,7 +13,7 @@ const Carts = ({fetchAllPurchases,orderHistory}) => {
     }
   return (
     <>
-      <h1>Admin-All Purchases</h1>
+      <h1>Admin-All Orders</h1>
       <div>{!success && message}</div>
       {!!success && (
         <div className='order-list'>

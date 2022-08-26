@@ -21,6 +21,13 @@
    background-color: rgb(208, 238, 33);
    padding: 2px;
 }
+.auth-details a {
+    background-color: red;
+    color: white;
+    /* padding: 1em 1.5em; */
+    /* text-decoration: none; */
+    /* text-transform: uppercase; */
+}
 
 .login-message {
     color: red;

@@ -7,6 +7,7 @@ const LoginPage = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginMessage, setLoginMessage] = useState("");
+  const navigate = useNavigate()
   const { login } = useAuth();
   return (
     <div className='auth-cont'>
@@ -37,6 +38,7 @@ const LoginPage = (props) => {
       >
         Login
       </button>
+      <button onClick={()=> navigate('/users/forgot-password')}>Forgot Password?</button>
       </div>
       
     </div>

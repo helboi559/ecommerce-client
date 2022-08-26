@@ -1,5 +1,5 @@
 import './App.css';
-import {Routes,Route,Outlet} from "react-router-dom"
+import {Routes,Route,Outlet,useParams} from "react-router-dom"
 import HomePage from './Pages/HomePage';
 import Navbar from './Components/Navbar';
 import {useEffect, useState} from 'react'
@@ -17,6 +17,8 @@ import UserProfile from './Pages/UserProfile';
 import AdminProducts from './Pages/AdminProducts';
 import AdminUsers from './Pages/AdminUsers';
 import UserCheckout from './Pages/UserCheckout';
+import ForgotPassword from './Pages/ForgotPassword';
+import ResetPassword from './Pages/ResetPassword';
 
 const urlEndpoint = process.env.REACT_APP_URL_ENDPOINT
 //https://e-commerce-server-jr.herokuapp.com/
@@ -58,7 +60,7 @@ function App() {
   const [userListLoading,setUserListLoading] = useState(false)
   const [showCart,setShowCart] = useState(true)
   const [cartItems,setCartItems] = useState([])
-  
+  let {token,id} = useParams()
   //addtoBasket
   const addToBasket = (product) => {
     //MAKE DEEP COPY FIRST!!!
@@ -206,6 +208,8 @@ function App() {
             <Route path='/carts/user/order-history' element={<CartsByUser orderHistory={orderHistory} fetchCartsByUser={fetchCartsByUser} />}/>
             <Route path='registration' element={<RegistrationPage />}/>
             <Route path='login' element={<LoginPage />}/>
+            <Route path='/users/forgot-password' element={<ForgotPassword urlEndpoint={urlEndpoint}/>}/>
+            <Route path='/users/reset-password/:id/:token' element={<ResetPassword urlEndpoint={urlEndpoint}/>}/>
             <Route path='admin' element={<AdminLayout/>}>
               <Route path='products' element={<AdminProducts setProductListLoading={setProductListLoading} productList={productList} fetchSingleProduct={fetchSingleProduct} singleProd={singleProd} urlEndpoint={urlEndpoint}/>}/>
               <Route path='/admin/users' element={<AdminUsers userList={userList} urlEndpoint={urlEndpoint} setUserListLoading={setUserListLoading}/>}/>
