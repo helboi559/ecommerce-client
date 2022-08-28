@@ -3,6 +3,8 @@ import {useState} from "react"
 
 const ForgotPassword = ({urlEndpoint}) => {
   const [email,setEmail] = useState('')
+  const [resetMessage,setResetMessage] = useState('')
+  const [disabled,setDisabled] = useState(false)
   const sendEmailRequest = async (email)=> {
     const url = `${urlEndpoint}/users/user/forgot-password`
     console.log("email",email)
@@ -18,23 +20,30 @@ const ForgotPassword = ({urlEndpoint}) => {
     })
     const resJSON = await res.json()
     console.log("sendEmailRequest",resJSON)
+    if(!resJSON.success) {
+            setResetMessage(resJSON.message)
+        }
+    if(resJSON.success) {
+        setResetMessage(resJSON.message)
+        setDisabled(true)
+    }
     return resJSON
   }
   return (
     <div>
       <h1>Forget Password?</h1>
-      <div>
-        <h3>Enter Email Address </h3>
-        <label>Email</label>
-        <input type="text" value={email} onChange={(e)=> {
+       <div className={`reset-message ${disabled ? 'reset-message-complete': ""}`}>{resetMessage}</div>
+      <div className='auth-details'>
+        <label>Enter Email Address</label>
+        <input type="text" disabled={disabled} value={email} onChange={(e)=> {
             setEmail(e.target.value)
         }}/>
-        
-      </div>
-      <button onClick={()=> {
+        <button  disabled={disabled} onClick={()=> {
           sendEmailRequest(email)
           //activate modal notify user of reset
         }}>Submit</button>
+      </div>
+      
     </div>
   )
 }

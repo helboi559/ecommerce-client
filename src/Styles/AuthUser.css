@@ -72,3 +72,14 @@
     width: 50%;
 }
 
+.reset-message {
+    font-weight: bold;
+    background-color:rgb(189, 96, 70) ;
+    margin: 1em;
+}
+.reset-message-complete {
+    font-weight: bold;
+    background-color: rgb(208, 238, 33);
+    margin: 1em;
+    
+}
