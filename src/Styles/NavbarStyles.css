@@ -180,9 +180,17 @@ align-items: center;
     border: 1px solid #ffdd40;
 }
 
+.nav-item span img {
+    width: 30px;
+    height: 30px;
+}
 .nav-icon {
     display: none;
 }
+
+/* .fas .fa-times {
+    display: block;
+} */
 
 @media screen and (max-width: 960px) {
     .nav-menu {

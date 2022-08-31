@@ -178,7 +178,7 @@ function App() {
     },[user,userListLoading])
      
     
-
+      //https://github.com/codebucks27/React-responsive-navbar
     //all purchases fetch **ADMIN**
     const fetchAllPurchases = async () => {
       const url = `${urlEndpoint}/carts`
@@ -198,8 +198,8 @@ function App() {
     <div className="App">
         <Routes>
           <Route path='/' element={<Navbar setShowCart={setShowCart} size={cartItems.length}/>}>
-            <Route index element={<HomePage productList={productList}/>}/>
-            <Route path="/products" element={<Products key={`products-list`} addToBasket={addToBasket}  filterField={filterField} 
+            <Route path="/" element={<HomePage productList={productList}/>}/>
+            <Route index path="/products" element={<Products key={`products-list`} addToBasket={addToBasket}  filterField={filterField} 
               filterValue={filterValue} limit={limit} page={page}  sortField={sortField} sortOrder={sortOrder} setSortField={setSortField} setSortOrder={setSortOrder}
               setFilterField={setFilterField} setFilterValue={setFilterValue} setLimit={setLimit} setPage={setPage}  productList={productList} fetchSingleProduct={fetchSingleProduct} urlEndpoint={urlEndpoint} singleProd={singleProd}/>}/>
             {/* <Route path="/users" element={<Users userList={userList}/>}/> */}

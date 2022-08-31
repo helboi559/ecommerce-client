@@ -13,13 +13,14 @@ const Navbar = ({size,setShowCart}) => {
     <>
       <nav className='navbar'>
         <div className='nav-container'>
+         
           <NavLink to="/" className='nav-logo'>
             Logo
           <i className="fas fa-code"></i>
           </NavLink>
-
        
           {!user && (
+            
             <ul className={click ? "nav-menu active" : "nav-menu"}>
               <li className="nav-item">
                 <NavLink 
@@ -40,7 +41,7 @@ const Navbar = ({size,setShowCart}) => {
             </ul>
           )}
         
-          {user && (
+          {!!user && (
             <ul className={click ? "nav-menu active" : "nav-menu"}> 
               
               <li className="nav-item">
@@ -98,10 +99,9 @@ const Navbar = ({size,setShowCart}) => {
                 onClick={handleClick}
                 >MyProfile</NavLink>
               </li>
-              {/* <li className='nav-box'>
+              <li className='nav-item'>
                 <NavLink 
                 to="/products/checkout"
-                activeClassName="active"
                 className="nav-links"
                 onClick={handleClick}
                 >
@@ -110,17 +110,17 @@ const Navbar = ({size,setShowCart}) => {
   
                   </NavLink>
                 
-              </li> */}
+              </li>
               
-              {/* <span className='login-status'>
+               <span className='login-status'>
                 <p>Logged in</p>
               </span>
 
               <button onClick={async () => {
                 await logout()
-              }}>Logout</button> */}
+              }}>Logout</button>
             </ul>
-          )}
+           )}
           <div className="nav-icon" onClick={handleClick}>
                 <i className={click ? "fas fa-times" : "fas fa-bars"}></i>
               </div>
