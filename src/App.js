@@ -47,7 +47,7 @@ function App() {
   const [singleProd,setSingleProd] = useState({message:null,success:true})
   const [userList,setUserList] = useState({message:[],success:false})
   // const [cartList,setCartList] = useState([])
-  const [sortField,setSortField] = useState('title')
+  const [sortField,setSortField] = useState("")
   const [sortOrder,setSortOrder] = useState("asc")
   const [filterField,setFilterField] = useState("title")
   const [filterValue,setFilterValue] = useState('')
@@ -95,7 +95,7 @@ function App() {
       // setIsPageLoading(true)
       const resJSON = await res.json()
       // setIsPageLoading(false)
-      console.log("fetchProductList()",resJSON)
+      // console.log("fetchProductList()",resJSON)
       setProductList(resJSON)
       return resJSON
     }
@@ -171,7 +171,7 @@ function App() {
       })
       const resJSON = await res.json()
       setUserList(resJSON)
-      console.log("fetchUserList()",resJSON)
+      // console.log("fetchUserList()",resJSON)
       return resJSON
       }
       fetchUserList()
@@ -199,8 +199,8 @@ function App() {
         <Routes>
           <Route path='/' element={<Navbar setShowCart={setShowCart} size={cartItems.length}/>}>
             <Route index element={<HomePage productList={productList}/>}/>
-            <Route path="/products" element={<Products key={`products-list`} addToBasket={addToBasket}  sortField={sortField} sortOrder={sortOrder} filterField={filterField} 
-              filterValue={filterValue} limit={limit} page={page} setSortField={setSortField} setSortOrder={setSortOrder} 
+            <Route path="/products" element={<Products key={`products-list`} addToBasket={addToBasket}  filterField={filterField} 
+              filterValue={filterValue} limit={limit} page={page}  sortField={sortField} sortOrder={sortOrder} setSortField={setSortField} setSortOrder={setSortOrder}
               setFilterField={setFilterField} setFilterValue={setFilterValue} setLimit={setLimit} setPage={setPage}  productList={productList} fetchSingleProduct={fetchSingleProduct} urlEndpoint={urlEndpoint} singleProd={singleProd}/>}/>
             {/* <Route path="/users" element={<Users userList={userList}/>}/> */}
             <Route path='/users/my-profile' element={<UserProfile urlEndpoint={urlEndpoint} singleUser={singleUser} fetchSingleUser={fetchSingleUser}/>}/>

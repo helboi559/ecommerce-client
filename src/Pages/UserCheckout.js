@@ -35,6 +35,7 @@ const UserCheckout = ({cartItems,setCartItems,urlEndpoint,addToBasket,removeFrom
         body:JSON.stringify(data)
         })
         const resJSON = await response.json()
+        setCartItems([])
         
     }
     return (
